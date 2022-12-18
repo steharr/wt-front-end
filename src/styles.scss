@@ -3,5 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
+// ** Color Palette
+$charcoal: #233d4d;
+$pumpkin: #fe7f2d;
+$sunglow: #fcca46;
+$olivine: #a1c181;
+$polished-pine: #619b8a;
+$white: #f7f7f7;
+$black: #001219;
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: $charcoal !important;
+}
+
+mat-stepper{
+    background-color: $charcoal !important;
+}

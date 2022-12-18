@@ -1,7 +1,7 @@
 <mat-stepper orientation="vertical" [linear]="true" #stepper>
 
     <mat-step *ngFor="let entry of exercises; let i = index" [stepControl]="entry">
-        <form [formGroup]="entry" class="flex flex-col justify-start w-1/2">
+        <form [formGroup]="entry" class="flex flex-col justify-start">
 
             <ng-template matStepLabel>
 
@@ -35,15 +35,15 @@
                 </div>
             </div>
 
-            <div class="flex justify-between">
+            <div class="flex justify-center gap-11">
 
                 <mat-form-field appearance="fill">
                     <mat-label>Reps</mat-label>
                     <input matInput type="number" formControlName="reps" required min="0" (change)="onFormChange(i)">
                 </mat-form-field>
 
-                <div>
-                    X
+                <div lass="flex justify-center">
+                    <div class="my-auto">X</div>
                 </div>
 
                 <mat-form-field appearance="fill">
@@ -52,7 +52,7 @@
                 </mat-form-field>
             </div>
 
-            <div>
+            <div class="flex justify-center gap-11">
                 <button *ngIf="i+1 === exercises.length" mat-raised-button color="primary"
                     (click)="addToWorkout(entry, i)">Add to
                     Workout</button>
