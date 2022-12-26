@@ -21,10 +21,9 @@ export class WorkoutStepperComponent implements OnInit {
   ]
 
   weights =[0]
-
   savedExercises=[false];
-  
   exercises: FormGroup[] = [];
+  commited = false;
 
   constructor(private _formBuilder: FormBuilder){}
 
@@ -36,6 +35,8 @@ export class WorkoutStepperComponent implements OnInit {
     if (exercise.valid){
       this.exercises.push(this.createEmptyExercise());
       this.savedExercises[stepIndex] = true;
+      if (!this.commited)
+        this.commited = true;
       setTimeout(()=>this.uiStepper.next(),0);
     }
   }
