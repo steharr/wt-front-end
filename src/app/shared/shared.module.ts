@@ -7,10 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
-
 
 @NgModule({
   declarations: [],
@@ -26,7 +26,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatIconModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     MatStepperModule,
@@ -39,7 +40,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatIconModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

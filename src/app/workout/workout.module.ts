@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import { WorkoutStepperComponent } from './workout-stepper/workout-stepper.component';
+import { WorkoutSaveBottomSheet, WorkoutStepperComponent } from './workout-stepper/workout-stepper.component';
 
 
 
 @NgModule({
   declarations: [
     WorkoutStepperComponent,
+    WorkoutSaveBottomSheet
   ],
   imports: [
     CommonModule,
@@ -16,7 +17,8 @@ import { WorkoutStepperComponent } from './workout-stepper/workout-stepper.compo
     CoreModule,
   ], 
   exports:[
-    WorkoutStepperComponent
+    WorkoutStepperComponent,
+    WorkoutSaveBottomSheet
   ]
 })
 export class WorkoutModule { }

@@ -15,7 +15,6 @@ export class WorkoutStepperComponent implements OnInit {
 
   @ViewChild('stepper') private uiStepper!: MatStepper;
 
-  // TODO: update from back end
   dummyExerciseOptions = [
     'deadlifts',
     'bench press',
@@ -60,24 +59,8 @@ export class WorkoutStepperComponent implements OnInit {
   }
 
   openBottomSheet(){
-    const exercises: Exercise[] = [];
-    this.exercises.forEach(exForm =>{
-      exercises.push({
-        exercise:exForm.controls['exercise'].value,
-        reps:exForm.controls['reps'].value,
-        sets:exForm.controls['sets'].value,
-      });
-    })
-
-    const workout: Workout = {
-      date:new Date(),
-      exercise:exercises,
-      rating:2,
-      workoutId:10,
-    }
-
     this._workoutSaveBottomSheet.open(WorkoutSaveBottomSheet, {
-      data: { workout:  workout},
+      data: { workout: this.getWorkoutFromForm()},
     });
   }
 
@@ -91,6 +74,25 @@ export class WorkoutStepperComponent implements OnInit {
     });
   }
 
+  private getWorkoutFromForm():Workout{
+    const exercises: Exercise[] = [];
+    
+    this.exercises.forEach(exForm =>{
+      exercises.push({
+        exercise:exForm.controls['exercise'].value,
+        reps:exForm.controls['reps'].value,
+        sets:exForm.controls['sets'].value,
+        weight:exForm.controls['weight'].value,
+      });
+    })
+    
+    return {
+      date:new Date(),
+      exercise:exercises,
+      rating:2,
+      workoutId:0,
+    }
+  }
 
 }
 

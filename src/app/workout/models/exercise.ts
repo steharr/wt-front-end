@@ -1,5 +1,6 @@
 export interface Exercise {
     exercise:string,
     sets:number,
-    reps:number
+    reps:number,
+    weight: number
 }
