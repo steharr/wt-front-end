@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatStepper } from '@angular/material/stepper';
+import { Exercise } from '../models/exercise';
+import { Workout } from '../models/workout';
+import { WorkoutService } from '../services/workout.service';
 
 @Component({
   selector: 'app-workout-stepper',
@@ -25,9 +29,10 @@ export class WorkoutStepperComponent implements OnInit {
   exercises: FormGroup[] = [];
   commited = false;
 
-  constructor(private _formBuilder: FormBuilder){}
+  constructor(private _formBuilder: FormBuilder,private _workoutSaveBottomSheet:MatBottomSheet, private workoutService: WorkoutService){}
 
   ngOnInit(): void {
+    this.workoutService.getWorkout().subscribe(data=>console.dir(data));
     this.exercises.push(this.createEmptyExercise());
   }
 
@@ -54,6 +59,28 @@ export class WorkoutStepperComponent implements OnInit {
     }
   }
 
+  openBottomSheet(){
+    const exercises: Exercise[] = [];
+    this.exercises.forEach(exForm =>{
+      exercises.push({
+        exercise:exForm.controls['exercise'].value,
+        reps:exForm.controls['reps'].value,
+        sets:exForm.controls['sets'].value,
+      });
+    })
+
+    const workout: Workout = {
+      date:new Date(),
+      exercise:exercises,
+      rating:2,
+      workoutId:10,
+    }
+
+    this._workoutSaveBottomSheet.open(WorkoutSaveBottomSheet, {
+      data: { workout:  workout},
+    });
+  }
+
   private createEmptyExercise(){
     return this._formBuilder.group({
       exercise: ['', Validators.required],
@@ -65,4 +92,32 @@ export class WorkoutStepperComponent implements OnInit {
   }
 
 
+}
+
+
+@Component({
+  selector: 'workout-save-bottom-sheet',
+  templateUrl: 'workout-save-bottom-sheet.html',
+})
+export class WorkoutSaveBottomSheet {
+  isLoading: boolean = false;
+  constructor(
+    private _bottomSheetRef: MatBottomSheetRef<WorkoutSaveBottomSheet>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {workout: Workout},
+    private workoutService:WorkoutService
+    ) {}
+
+  saveWorkout(): void {
+  this.isLoading=true;
+  this.workoutService.saveWorkout(this.data.workout).subscribe(
+    {
+      next:()=> this.isLoading=false,
+      error:()=> this.isLoading=false,
+      complete:()=> this.isLoading=false,
+    })
+  }
+
+  close(){
+    this._bottomSheetRef.dismiss();
+  }
 }

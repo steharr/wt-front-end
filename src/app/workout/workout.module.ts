@@ -8,7 +8,7 @@ import { WorkoutStepperComponent } from './workout-stepper/workout-stepper.compo
 
 @NgModule({
   declarations: [
-    WorkoutStepperComponent
+    WorkoutStepperComponent,
   ],
   imports: [
     CommonModule,
