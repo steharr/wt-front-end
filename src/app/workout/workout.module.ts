@@ -12,9 +12,9 @@ import { WorkoutSaveBottomSheet, WorkoutStepperComponent } from './workout-stepp
     WorkoutSaveBottomSheet
   ],
   imports: [
-    CommonModule,
     SharedModule,
     CoreModule,
+    CommonModule
   ], 
   exports:[
     WorkoutStepperComponent,
