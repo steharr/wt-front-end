@@ -4,20 +4,21 @@ import { Observable } from 'rxjs';
 import { Workout } from '../models/workout';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkoutService {
-
   private url: string = 'http://localhost:8080/workout';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getWorkout():Observable<Workout>{
-      return this.http.get<Workout>(this.url);
+  getWorkout(): Observable<Workout> {
+    return this.http.get<Workout>(this.url);
+  }
+  getWorkouts(): Observable<Workout[]> {
+    return this.http.get<Workout[]>(this.url + '/home');
   }
 
-  saveWorkout(workout: Workout):Observable<Workout>{
-      return this.http.post<Workout>(this.url, workout);
+  saveWorkout(workout: Workout): Observable<Workout> {
+    return this.http.post<Workout>(this.url, workout);
   }
-  
 }
