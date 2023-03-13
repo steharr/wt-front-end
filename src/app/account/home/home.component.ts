@@ -8,9 +8,9 @@ import { WorkoutService } from 'src/app/workout/services/workout.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'date', 'rating'];
+  displayedColumns: string[] = ['exercise', 'sets', 'reps', 'weight'];
   dataSource: Workout[] = [];
-
+  panelOpenState = false;
   constructor(private workoutService: WorkoutService) {}
 
   ngOnInit(): void {

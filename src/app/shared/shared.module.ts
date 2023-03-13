@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatExpansionModule,
   ],
   exports: [
     MatStepperModule,
@@ -45,6 +47,7 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatExpansionModule,
   ],
 })
 export class SharedModule {}
