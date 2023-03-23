@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { WorkoutModule } from '../workout/workout.module';
+import { WorkoutSummaryComponent } from './home/workout-summary.component';
 
 @NgModule({
-  declarations: [RegisterComponent, HomeComponent],
+  declarations: [RegisterComponent, HomeComponent, WorkoutSummaryComponent],
   imports: [AccountRoutingModule, SharedModule, CommonModule, WorkoutModule],
   exports: [RegisterComponent],
 })

@@ -1,10 +1,7 @@
-
-
 <div class="flex justify-center gap-11">
-    <button mat-flat-button color="primary"
-        (click)="goToHome()">Home</button>
-    <button  mat-flat-button color="primary"
-        (click)="goToWorkout()">Workout</button>
+    <button mat-flat-button color="primary" (click)="goToHome()">Home</button>
+    <button mat-flat-button color="primary" (click)="goToWorkout()">Workout</button>
 </div>
+<app-error-banner></app-error-banner>
 
 <router-outlet></router-outlet>

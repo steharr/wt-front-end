@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.analysis-box{
+    min-height: 5rem;
+    border: .125rem solid $theme-columbia;
+    padding: 0rem 1rem;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $theme-columbia-dark;
+    border-radius: .125rem .125rem 0 0;
+
+    .analysis-box-label{
+        font-weight: 400;
+    }
+}

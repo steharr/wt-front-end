@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { NgModule } from '@angular/core';
+import { ErrorBannerComponent } from './error-banner/error-banner.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [ErrorBannerComponent],
+  imports: [CommonModule],
+  exports: [ErrorBannerComponent],
 })
-export class CoreModule { }
+export class CoreModule {}
