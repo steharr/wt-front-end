@@ -1,14 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  MatBottomSheet,
-  MatBottomSheetRef,
-  MAT_BOTTOM_SHEET_DATA,
-} from '@angular/material/bottom-sheet';
-import { MatStepper } from '@angular/material/stepper';
-import { Exercise } from '../models/exercise';
-import { Workout } from '../models/workout';
-import { WorkoutService } from '../services/workout.service';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef,} from '@angular/material/bottom-sheet';
+import {MatStepper} from '@angular/material/stepper';
+import {Exercise} from '../models/exercise';
+import {Workout} from '../models/workout';
+import {WorkoutService} from '../services/workout.service';
+import {WorkoutStepperUiService} from "../services/workout-stepper-ui.service";
 
 @Component({
   selector: 'app-workout-stepper',
@@ -30,14 +27,23 @@ export class WorkoutStepperComponent implements OnInit {
   savedExercises = [false];
   exercises: FormGroup[] = [];
   commited = false;
+  saveDots = 0;
+  isLoading = false;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _workoutSaveBottomSheet: MatBottomSheet,
-    private workoutService: WorkoutService
-  ) {}
+    private workoutStepperUiService: WorkoutStepperUiService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.workoutStepperUiService.saveDots$.subscribe(value => {
+      this.saveDots = value;
+    })
+    this.workoutStepperUiService.loading$.subscribe(value => {
+      this.isLoading = value;
+    })
     this.exercises.push(this.createEmptyExercise());
   }
 
@@ -49,6 +55,7 @@ export class WorkoutStepperComponent implements OnInit {
       setTimeout(() => this.uiStepper.next(), 0);
     }
   }
+
   updateWorkout(exercise: FormGroup, stepIndex: number) {
     if (exercise.valid) {
       this.exercises[stepIndex] = exercise;
@@ -65,7 +72,7 @@ export class WorkoutStepperComponent implements OnInit {
 
   openBottomSheet() {
     this._workoutSaveBottomSheet.open(WorkoutSaveBottomSheet, {
-      data: { workout: this.getWorkoutFromForm() },
+      data: {workout: this.getWorkoutFromForm()},
     });
   }
 
@@ -105,23 +112,48 @@ export class WorkoutStepperComponent implements OnInit {
   templateUrl: 'workout-save-bottom-sheet.html',
 })
 export class WorkoutSaveBottomSheet {
-  isLoading: boolean = false;
+
+  dots = 0;
+  isLoading = false;
+
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<WorkoutSaveBottomSheet>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { workout: Workout },
-    private workoutService: WorkoutService
-  ) {}
+    private workoutService: WorkoutService,
+    private workoutStepperUiService: WorkoutStepperUiService
+  ) {
+
+    this.workoutStepperUiService.loading$.subscribe({
+      next: (value) => {
+        this.isLoading = value;
+      }
+    })
+  }
 
   saveWorkout(): void {
-    this.isLoading = true;
-    this.workoutService.saveWorkout(this.data.workout).subscribe({
-      next: () => (this.isLoading = false),
-      error: () => (this.isLoading = false),
-      complete: () => (this.isLoading = false),
-    });
+    this.workoutStepperUiService.triggerDotsAnimation();
+    this.workoutStepperUiService.setLoading(true);
+    this.workoutStepperUiService.saveDots$.subscribe(value => this.dots = value);
+
+    setTimeout(() => {
+      this.workoutService.saveWorkout(this.data.workout).subscribe({
+        next: () => (this.workoutStepperUiService.setLoading()),
+        error: () => (this.workoutStepperUiService.setLoading()),
+        complete: () => (this.workoutStepperUiService.setLoading()),
+      });
+    }, 10000);
+
   }
 
   close() {
     this._bottomSheetRef.dismiss();
+  }
+
+  range(limit: number) {
+    const range = [];
+    for (let i = 0; i < limit; i++) {
+      range.push(i);
+    }
+    return range;
   }
 }

@@ -1,75 +1,83 @@
+<div *ngIf="isLoading" class="overlay-box">
+  <mat-spinner [strokeWidth]="15"></mat-spinner>
+</div>
+
 <mat-stepper orientation="vertical" [linear]="true" #stepper>
 
-    <mat-step *ngFor="let entry of exercises; let i = index" [stepControl]="entry">
-        <form [formGroup]="entry" class="flex flex-col justify-start">
+  <mat-step *ngFor="let entry of exercises; let i = index" [stepControl]="entry">
+    <form [formGroup]="entry" class="flex flex-col justify-start">
 
-            <ng-template matStepLabel>
+      <ng-template matStepLabel>
 
                 <span
-                    *ngIf="exercises[i].controls['exercise'].value !== ''">{{exercises[i].controls['exercise'].value|titlecase}}</span>
-                <span *ngIf="exercises[i].controls['exercise'].value === ''">Exercise {{i+1}} of
-                    {{exercises.length}}</span>
-                <span *ngIf="commited && savedExercises[i]"><mat-icon
-                        class="icon-success">check_circle_outline</mat-icon></span>
-                <span *ngIf="commited && entry.touched && !savedExercises[i]"
-                    class="icon-warning"><mat-icon>error_outline</mat-icon></span>
+                  *ngIf="exercises[i].controls['exercise'].value !== ''">{{exercises[i].controls['exercise'].value|titlecase}}</span>
+        <span *ngIf="exercises[i].controls['exercise'].value === ''">Exercise {{i + 1}} of
+          {{exercises.length}}</span>
+        <span *ngIf="commited && savedExercises[i]"><mat-icon
+          class="icon-success">check_circle_outline</mat-icon></span>
+        <span *ngIf="commited && entry.touched && !savedExercises[i]"
+              class="icon-warning"><mat-icon>error_outline</mat-icon></span>
 
-            </ng-template>
+      </ng-template>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Exercise</mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Exercise</mat-label>
 
-                <mat-select name="food" formControlName="exercise" (selectionChange)="onFormChange(i)">
-                    <mat-option *ngFor="let option of dummyExerciseOptions" [value]="option">
-                        {{option | titlecase}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+        <mat-select name="food" formControlName="exercise" (selectionChange)="onFormChange(i)">
+          <mat-option *ngFor="let option of dummyExerciseOptions" [value]="option">
+            {{option | titlecase}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
-            <div class="flex justify-center">
-                <div class="flex">
-                    <mat-label>Weight</mat-label>
-                    <mat-slider min="0" max="200" step="0.5" value="10">
-                        <input matSliderThumb formControlName="weight" [(ngModel)]="weights[i]"
-                            (change)="onFormChange(i)">
-                    </mat-slider>
-                    <div>
-                        {{weights[i]}} KG
-                    </div>
-                </div>
-            </div>
+      <div class="flex justify-center">
+        <div class="flex">
+          <mat-label>Weight</mat-label>
+          <mat-slider min="0" max="200" step="0.5" value="10">
+            <input matSliderThumb formControlName="weight" [(ngModel)]="weights[i]"
+                   (change)="onFormChange(i)">
+          </mat-slider>
+          <div>
+            {{weights[i]}} KG
+          </div>
+        </div>
+      </div>
 
-            <div class="flex justify-center gap-px">
+      <div class="flex justify-center gap-px">
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Reps</mat-label>
-                    <input matInput type="number" formControlName="reps" required min="0" (change)="onFormChange(i)">
-                </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Reps</mat-label>
+          <input matInput type="number" formControlName="reps" required min="0" (change)="onFormChange(i)">
+        </mat-form-field>
 
-                <div class="flex justify-center">
-                    <div class="my-auto icon-multiply"><mat-icon>close</mat-icon></div>
-                </div>
+        <div class="flex justify-center">
+          <div class="my-auto icon-multiply">
+            <mat-icon>close</mat-icon>
+          </div>
+        </div>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Sets</mat-label>
-                    <input matInput type="number" formControlName="sets" required min="0" (change)="onFormChange(i)">
-                </mat-form-field>
-            </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Sets</mat-label>
+          <input matInput type="number" formControlName="sets" required min="0" (change)="onFormChange(i)">
+        </mat-form-field>
+      </div>
 
-            <div class="flex justify-center gap-11">
-                <button *ngIf="i+1 === exercises.length" mat-flat-button color="primary"
-                    (click)="addToWorkout(entry, i)">Add to
-                    Workout</button>
-                <button *ngIf="i+1 < exercises.length" mat-flat-button color="primary"
-                    (click)="updateWorkout(entry, i)">Update
-                    Exercise</button>
-                <button mat-raised-button color="secondary" matStepperNext>Next</button>
-                <button mat-flat-button color="primary" (click)="openBottomSheet()">Complete Workout</button>
-            </div>
+      <div class="flex justify-center gap-11">
+        <button *ngIf="i+1 === exercises.length" mat-flat-button color="primary"
+                (click)="addToWorkout(entry, i)">Add to
+          Workout
+        </button>
+        <button *ngIf="i+1 < exercises.length" mat-flat-button color="primary"
+                (click)="updateWorkout(entry, i)">Update
+          Exercise
+        </button>
+        <button mat-raised-button color="secondary" matStepperNext>Next</button>
+        <button mat-flat-button color="primary" (click)="openBottomSheet()">Complete Workout</button>
+      </div>
 
-        </form>
-    </mat-step>
+    </form>
+  </mat-step>
 
 </mat-stepper>
 
