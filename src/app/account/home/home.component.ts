@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Workout } from 'src/app/workout/models/workout';
 import { WorkoutAnalysis } from 'src/app/workout/models/workout-analysis';
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   private subs_: Subscription[] = [];
 
   panelOpenState = false;
-  constructor(private workoutService: WorkoutService) {}
+  constructor(private workoutService: WorkoutService, private router: Router) {}
 
   ngOnInit(): void {
     this.getWorkouts();
@@ -48,5 +49,9 @@ export class HomeComponent implements OnInit {
         },
       })
     );
+  }
+
+  goToWorkout() {
+    this.router.navigate(['workout']);
   }
 }
