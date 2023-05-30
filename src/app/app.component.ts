@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+  showMenu = false;
+
+  constructor(private router: Router) {
+  }
 
   goToWorkout() {
     this.router.navigate(['workout']);
   }
+
   goToHome() {
     this.router.navigate(['home']);
   }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
+
   title = 'workout-tracker';
 }

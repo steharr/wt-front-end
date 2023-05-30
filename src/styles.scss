@@ -7,7 +7,6 @@
 html,
 body {
   height: 100%;
-  background-color: $theme-columbia-dark;
   color: $theme-dark;
 }
 
@@ -67,5 +66,15 @@ body {
 
 .mat-mdc-progress-spinner {
   --mdc-circular-progress-active-indicator-color: #fcca46;
+}
 
+.mat-mdc-card {
+  border-radius: 71px;
+  background: #ffffff;
+  box-shadow: 7px 7px 24px #ababab,
+  -7px -7px 24px #ffffff;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
