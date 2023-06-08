@@ -1,0 +1,27 @@
+<div class="flex flex-wrap justify-center gap-2">
+    <div class="md:w-2/5">
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Register your deets</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="form">
+                    <mat-form-field>
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="username">
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="primary" (click)="submit()">Login</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
