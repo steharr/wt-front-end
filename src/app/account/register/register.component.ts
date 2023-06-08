@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
 import { GenderTypeEnum } from '../enums/gender-type.enum';
 import { AccountService } from '../services/account.service';
 
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
   });
   constructor(
     private accountService: AccountService,
+    private errorBannerService: ErrorBannerService,
     private _fb: FormBuilder
   ) {}
   ngOnInit(): void {}
@@ -34,8 +36,12 @@ export class RegisterComponent implements OnInit {
           ...this.form.value,
         })
         .subscribe({
-          next: () => {},
-          error: () => {},
+          next: (res) => {
+            this.storeToken(res.token);
+          },
+          error: () => {
+            this.errorBannerService.displayError(new Error('Please try again'));
+          },
         });
     }
   }
@@ -50,5 +56,9 @@ export class RegisterComponent implements OnInit {
       password: 'test',
       gender: GenderTypeEnum.MALE,
     });
+  }
+
+  private storeToken(token: string) {
+    localStorage.setItem('_wta', token);
   }
 }
