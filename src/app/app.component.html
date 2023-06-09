@@ -4,12 +4,12 @@
   </button>
   <span>Workout Tracker</span>
   <span class="spacer"></span>
-  <button mat-icon-button>
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button>
-    <mat-icon>share</mat-icon>
-  </button>
+  <div *ngIf="isLoggedIn$ | async" (click)="logout()" mat-icon-button>
+    <span>{{accountDetails?.username}}</span>
+    <button (click)="logout()" mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 <mat-toolbar *ngIf="showMenu">
   <mat-tab-group>
