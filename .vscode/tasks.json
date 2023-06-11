@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "start  --host=127.0.0.1",
+      "script": "start",
       "isBackground": true,
       "presentation": {
         "focus": true,
