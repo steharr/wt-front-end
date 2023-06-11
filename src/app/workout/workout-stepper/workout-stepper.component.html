@@ -4,19 +4,29 @@
 
 <mat-stepper orientation="vertical" [linear]="true" #stepper>
 
-  <mat-step *ngFor="let entry of exercises; let i = index" [stepControl]="entry">
+  <mat-step *ngFor="let entry of exercises; let i = index" [stepControl]="entry" class="workout-step">
     <form [formGroup]="entry" class="flex flex-col justify-start">
 
       <ng-template matStepLabel>
+        <div class="flex flex-row gap-20">
 
-                <span
-                  *ngIf="exercises[i].controls['exercise'].value !== ''">{{exercises[i].controls['exercise'].value|titlecase}}</span>
-        <span *ngIf="exercises[i].controls['exercise'].value === ''">Exercise {{i + 1}} of
-          {{exercises.length}}</span>
-        <span *ngIf="commited && savedExercises[i]"><mat-icon
-          class="icon-success">check_circle_outline</mat-icon></span>
-        <span *ngIf="commited && entry.touched && !savedExercises[i]"
+          <div class="flex items-center justify-center">
+            <span
+              *ngIf="exercises[i].controls['exercise'].value !== ''">{{exercises[i].controls['exercise'].value|titlecase}}</span>
+            <span *ngIf="exercises[i].controls['exercise'].value === ''">Exercise {{i + 1}} of
+              {{exercises.length}}</span>
+            <span *ngIf="commited && savedExercises[i]"><mat-icon
+                class="icon-success">check_circle_outline</mat-icon></span>
+            <span *ngIf="commited && entry.touched && !savedExercises[i]"
               class="icon-warning"><mat-icon>error_outline</mat-icon></span>
+          </div>
+
+          <div *ngIf="false" class="flex items-center workout-navigation-arrows-container"
+            (click)="$event.stopPropagation()">
+            <button mat-button matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+          </div>
+        </div>
 
       </ng-template>
 
@@ -35,8 +45,7 @@
         <div class="flex">
           <mat-label>Weight</mat-label>
           <mat-slider min="0" max="200" step="0.5" value="10">
-            <input matSliderThumb formControlName="weight" [(ngModel)]="weights[i]"
-                   (change)="onFormChange(i)">
+            <input matSliderThumb formControlName="weight" [(ngModel)]="weights[i]" (change)="onFormChange(i)">
           </mat-slider>
           <div>
             {{weights[i]}} KG
@@ -63,17 +72,19 @@
         </mat-form-field>
       </div>
 
-      <div class="flex justify-center gap-11">
-        <button *ngIf="i+1 === exercises.length" mat-flat-button color="primary"
-                (click)="addToWorkout(entry, i)">Add to
-          Workout
+      <div class="flex justify-end gap-5">
+        <button *ngIf="i+1 === exercises.length" mat-flat-button color="primary" (click)="addToWorkout(entry, i)">
+          Add
+          <mat-icon>add_circle_outline</mat-icon>
         </button>
-        <button *ngIf="i+1 < exercises.length" mat-flat-button color="primary"
-                (click)="updateWorkout(entry, i)">Update
-          Exercise
+        <button *ngIf="i+1 < exercises.length" mat-flat-button color="primary" (click)="updateWorkout(entry, i)">
+          Update
+          <mat-icon>update</mat-icon>
         </button>
-        <button mat-raised-button color="secondary" matStepperNext>Next</button>
-        <button mat-flat-button color="primary" (click)="openBottomSheet()">Complete Workout</button>
+        <button mat-flat-button color="primary" (click)="openBottomSheet()">
+          Finish
+          <mat-icon>save</mat-icon>
+        </button>
       </div>
 
     </form>

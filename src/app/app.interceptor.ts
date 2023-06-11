@@ -21,7 +21,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(this.filterForAuthentication(request)).pipe(
       catchError((error: HttpErrorResponse) => {
-        const e = new Error(error.error.error.message);
+        const e = new Error(error.error);
         this.errorBannerService.displayError(e);
         return throwError(() => e);
       })
