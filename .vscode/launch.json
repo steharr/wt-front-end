@@ -7,11 +7,11 @@
       "request": "launch",
       "preLaunchTask": "npm: start",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}",
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ]
+      "webRoot": "${workspaceFolder}"
+      // "resolveSourceMapLocations": [
+      //   "${workspaceFolder}/**",
+      //   "!**/node_modules/**"
+      // ]
     },
     {
       "name": "ng test",

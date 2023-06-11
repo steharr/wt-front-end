@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
+import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
+import { ToastService } from 'src/app/core/toast/toast.service';
 import { AccountDetails } from '../models/account-details.model';
 import { Auth } from '../models/auth.model';
 
@@ -20,6 +22,7 @@ export class AccountService {
   constructor(
     private http: HttpClient,
     private errorBannerService: ErrorBannerService,
+    private toastService: ToastService,
     private _fb: FormBuilder,
     private router: Router
   ) {}
@@ -35,6 +38,11 @@ export class AccountService {
       next: (res) => {
         this.storeToken(res.token);
         this.updateLoginStatus(true);
+        this.toastService.bread({
+          message: 'Login Successful!',
+          type: ToastTypeEnum.SUCCESS,
+          show: true,
+        });
         this.router.navigate(['/account/home']);
       },
       error: () => {

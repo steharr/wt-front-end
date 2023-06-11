@@ -1,0 +1,33 @@
+@import '../../../variables.scss';
+
+.icon-container-sm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: .125rem;
+    padding: 0 .5rem;
+    
+    border-radius: 5%;
+
+    .icon-sm {
+        height: 1.3rem;
+    }
+
+    &:hover{
+        opacity: .85;
+        cursor: pointer;
+    }
+
+    &.light{
+        color: $theme-white;
+    }
+
+    &.dark{
+        color: $theme-dark;
+    }
+}
+
+.text-sm {
+    font-size: .75rem;
+}

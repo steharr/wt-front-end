@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 import { ErrorBannerComponent } from './error-banner/error-banner.component';
+import { IconComponent } from './icon/icon.component';
+import { ToastComponent, WtToastComponent } from './toast/toast.component';
 
 @NgModule({
-  declarations: [ErrorBannerComponent],
-  imports: [CommonModule],
-  exports: [ErrorBannerComponent],
+  declarations: [
+    ErrorBannerComponent,
+    IconComponent,
+    ToastComponent,
+    WtToastComponent,
+  ],
+  imports: [CommonModule, SharedModule],
+  exports: [ErrorBannerComponent, IconComponent, ToastComponent],
 })
 export class CoreModule {}
