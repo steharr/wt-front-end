@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
 import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
 import { ToastService } from 'src/app/core/toast/toast.service';
+import { environment } from 'src/env';
 import { AccountDetails } from '../models/account-details.model';
 import { Auth } from '../models/auth.model';
 
@@ -13,7 +14,7 @@ import { Auth } from '../models/auth.model';
   providedIn: 'root',
 })
 export class AccountService {
-  private url: string = 'http://localhost:8080/account/';
+  private url: string = environment.url + 'account/';
   private TOKEN_KEY = '_wta';
 
   private isLoggedIn = new BehaviorSubject<boolean>(false);

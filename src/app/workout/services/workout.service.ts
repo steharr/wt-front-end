@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/env';
 import { Workout } from '../models/workout';
 import { WorkoutAnalysis } from '../models/workout-analysis';
 
@@ -8,7 +9,7 @@ import { WorkoutAnalysis } from '../models/workout-analysis';
   providedIn: 'root',
 })
 export class WorkoutService {
-  private url: string = 'http://localhost:8080/workout';
+  private url: string = environment.url;
 
   constructor(private http: HttpClient) {}
 

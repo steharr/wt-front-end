@@ -9,21 +9,7 @@
 
     <app-icon [matIconName]="'account_circle'" [iconTitle]="accountDetails.username"></app-icon>
     <app-icon [matIconName]="'exit_to_app'" [iconTitle]="'logout'" (clickEvent)="logout()"></app-icon>
-    <!-- <div class="icon-container-sm">
-      <div class="icon-sm">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-      <div class="text-center text-sm"></div>
-    </div>
-    <div class="icon-container-sm">
-      <div class="icon-sm" (click)="logout()">
-        <mat-icon></mat-icon>
-      </div>
-      <div class="text-center text-sm">Logout</div>
-    </div>
-    <div> -->
 
-    <!-- </div> -->
   </div>
 </mat-toolbar>
 <mat-toolbar *ngIf="showMenu">
