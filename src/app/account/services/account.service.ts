@@ -14,7 +14,7 @@ import { Auth } from '../models/auth.model';
   providedIn: 'root',
 })
 export class AccountService {
-  private url: string = environment.url + 'account/';
+  private url: string = environment.url + '/account/';
   private TOKEN_KEY = '_wta';
 
   private isLoggedIn = new BehaviorSubject<boolean>(false);
