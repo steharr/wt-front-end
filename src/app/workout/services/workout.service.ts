@@ -9,20 +9,20 @@ import { WorkoutAnalysis } from '../models/workout-analysis';
   providedIn: 'root',
 })
 export class WorkoutService {
-  private url: string = environment.url;
+  private url: string = environment.url + '/workout/';
 
   constructor(private http: HttpClient) {}
 
   getWorkouts(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(this.url + '/home');
+    return this.http.get<Workout[]>(this.url + 'home');
   }
   saveWorkout(workout: Workout): Observable<Workout> {
-    return this.http.post<Workout>(this.url, workout);
+    return this.http.post<Workout>(this.url + 'save', workout);
   }
   getAnalysis(id: number): Observable<WorkoutAnalysis> {
-    return this.http.get<WorkoutAnalysis>(this.url + `/analysis/${id}`);
+    return this.http.get<WorkoutAnalysis>(this.url + `analysis/${id}`);
   }
   deleteWorkout(id: number): Observable<Boolean> {
-    return this.http.delete<Boolean>(this.url + `/${id}`);
+    return this.http.delete<Boolean>(this.url + `${id}`);
   }
 }
