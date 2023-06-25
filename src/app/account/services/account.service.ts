@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ErrorType } from 'src/app/core/error-banner/enums/error-type.enum';
 import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
 import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
 import { ToastService } from 'src/app/core/toast/toast.service';
@@ -47,7 +48,10 @@ export class AccountService {
         this.router.navigate(['/account/home']);
       },
       error: () => {
-        this.errorBannerService.displayError(new Error('Please try again'));
+        this.errorBannerService.displayError({
+          err: new Error('Error logging in user, Please try again'),
+          type: ErrorType.WARNING,
+        });
       },
     });
   }
@@ -60,7 +64,10 @@ export class AccountService {
         this.updateLoginStatus(true);
       },
       error: () => {
-        this.errorBannerService.displayError(new Error('Please try again'));
+        this.errorBannerService.displayError({
+          err: new Error('Error registering user, Please try again'),
+          type: ErrorType.WARNING,
+        });
       },
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorType } from './enums/error-type.enum';
+import { ErrorBanner } from './models/error-banner.model';
 import { ErrorBannerService } from './services/error-banner.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { ErrorBannerService } from './services/error-banner.service';
   styleUrls: ['./error-banner.component.scss'],
 })
 export class ErrorBannerComponent implements OnInit {
-  message: string | undefined = '';
-  errorType: ErrorType | undefined;
+  errors: ErrorBanner[] = [];
   show: boolean = false;
+  id = 0;
+  types = ErrorType;
 
   constructor(private errorBannerService: ErrorBannerService) {}
 
@@ -18,7 +20,10 @@ export class ErrorBannerComponent implements OnInit {
     this.errorBannerService.error$.subscribe({
       next: (e) => {
         this.show = true;
-        this.message = e?.message;
+        this.errors.push({
+          ...e,
+          id: this.id++,
+        });
       },
       complete: () => {
         this.show = false;
@@ -26,7 +31,7 @@ export class ErrorBannerComponent implements OnInit {
     });
   }
 
-  close() {
-    this.show = false;
+  close(errorBanner: ErrorBanner) {
+    this.errors = this.errors.filter((elem) => elem.id !== errorBanner.id);
   }
 }

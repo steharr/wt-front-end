@@ -10,6 +10,7 @@ export class IconComponent {
   @Input() iconTitle: string = '';
   @Input() lightTheme = false;
   @Output() clickEvent = new EventEmitter<void>();
+  @Input() iconColorType: string = '';
 
   onClick() {
     this.clickEvent.emit();
