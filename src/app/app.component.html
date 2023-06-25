@@ -4,8 +4,10 @@
   </button>
   <span>Workout Tracker</span>
   <span class="spacer"></span>
+  <app-health [displayError]="true"></app-health>
   <div *ngIf="(isLoggedIn$ | async) && accountDetails" (click)="logout()" mat-icon-button
     class="flex justify-center align-center">
+
 
     <app-icon [matIconName]="'account_circle'" [iconTitle]="accountDetails.username"></app-icon>
     <app-icon [matIconName]="'exit_to_app'" [iconTitle]="'logout'" (clickEvent)="logout()"></app-icon>

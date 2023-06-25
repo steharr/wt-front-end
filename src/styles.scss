@@ -32,7 +32,15 @@ body {
   padding-left: 0.12rem;
   color: #F9A825;
 }
-
+.icon-success-base {
+  color: #2E7D32 !important;
+}
+.icon-warning-base {
+  color: #C62828 !important;
+}
+.icon-info-base {
+  color: #F9A825 !important; 
+}
 .icon-multiply {
   font-size: 1.25rem;
   font-weight: bolder;

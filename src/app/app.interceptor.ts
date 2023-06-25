@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ErrorType } from './core/error-banner/enums/error-type.enum';
 import { ErrorBannerService } from './core/error-banner/services/error-banner.service';
 
 @Injectable()
@@ -22,7 +23,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
     return next.handle(this.filterForAuthentication(request)).pipe(
       catchError((error: HttpErrorResponse) => {
         const e = new Error(error.error);
-        this.errorBannerService.displayError(e);
+        this.errorBannerService.displayError({
+          err: e,
+          type: ErrorType.INFO,
+        });
         return throwError(() => e);
       })
     );

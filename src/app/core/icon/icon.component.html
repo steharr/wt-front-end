@@ -1,6 +1,16 @@
 <div class="icon-container-sm" [class.light]="lightTheme" [class.dark]="!lightTheme" (click)="onClick()">
-    <div class="icon-sm">
-        <mat-icon>{{matIconName}}</mat-icon>
+    <div class="icon-sm" [ngClass]="{
+        'icon-success-base' : iconColorType ==='icon-success',
+        'icon-warning-base' : iconColorType ==='icon-warning',
+        'icon-info-base' : iconColorType ==='icon-info'
+    }">
+        <span [ngClass]="{
+            'icon-success-base' : iconColorType ==='icon-success',
+            'icon-warning-base' : iconColorType ==='icon-warning',
+            'icon-info-base' : iconColorType ==='icon-info'
+        }">
+            <mat-icon>{{matIconName}}</mat-icon>
+        </span>
     </div>
     <div class="text-center text-sm">{{iconTitle}}</div>
 </div>
