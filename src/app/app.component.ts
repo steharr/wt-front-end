@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { combineLatest, filter } from 'rxjs';
 import { AccountDetails } from './account/models/account-details.model';
 import { AccountService } from './account/services/account.service';
 
@@ -19,11 +19,13 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
-    this.navigationEnd$.subscribe(() => {
-      if (this.accountDetails === null) {
-        this.getDetails();
+    combineLatest([this.navigationEnd$, this.isLoggedIn$]).subscribe(
+      ([event, isLoggedIn]) => {
+        if (this.accountDetails === null && isLoggedIn) {
+          this.getDetails();
+        }
       }
-    });
+    );
   }
 
   goToWorkout() {

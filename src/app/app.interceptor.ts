@@ -23,10 +23,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     return next.handle(this.filterForAuthentication(request)).pipe(
       catchError((error: HttpErrorResponse) => {
         const e = new Error(error.error);
-        this.errorBannerService.displayError({
-          err: e,
-          type: ErrorType.INFO,
-        });
+        this.handleApplicationError(e);
         return throwError(() => e);
       })
     );
@@ -42,5 +39,12 @@ export class AppHttpInterceptor implements HttpInterceptor {
       });
     }
     return request;
+  }
+
+  private handleApplicationError(error: Error) {
+    this.errorBannerService.displayError({
+      err: error,
+      type: ErrorType.INFO,
+    });
   }
 }
