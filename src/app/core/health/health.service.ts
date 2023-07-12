@@ -7,6 +7,9 @@ import { environment } from 'src/env';
   providedIn: 'root',
 })
 export class HealthService {
+  private loading = new BehaviorSubject<boolean>(false);
+  loading$ = this.loading.asObservable();
+
   private serviceAvailable = new BehaviorSubject<boolean>(true);
   serviceAvailable$ = this.serviceAvailable.asObservable();
 
@@ -23,12 +26,15 @@ export class HealthService {
   }
 
   checkHealthStatus() {
+    this.loading.next(true);
     this.isAlive().subscribe({
       next: () => {
         this.updateServiceAvailable(true);
+        this.loading.next(false);
       },
       error: () => {
         this.updateServiceAvailable(false);
+        this.loading.next(false);
       },
     });
   }

@@ -54,6 +54,4 @@ export class AppComponent implements OnInit {
       },
     });
   }
-
-  title = 'workout-tracker';
 }

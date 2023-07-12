@@ -12,6 +12,7 @@ export class HealthComponent implements OnInit {
   @Input() displayError: boolean = false;
 
   serverAlive$ = this.healthService.serviceAvailable$;
+  serverHealthLoading$ = this.healthService.loading$;
 
   constructor(
     private healthService: HealthService,

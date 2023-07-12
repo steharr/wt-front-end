@@ -2,8 +2,14 @@
     <app-icon [matIconName]="'signal_cellular_alt'" [iconTitle]="'available'"
         [iconColorType]="'icon-success'"></app-icon>
 </span>
-<span *ngIf="!(serverAlive$ | async)">
+<span *ngIf="!(serverAlive$ | async) && (serverHealthLoading$ | async)">
     <app-icon [matIconName]="'signal_cellular_connected_no_internet_4_bar'" [iconTitle]="'unavailable'"
         [iconColorType]="'icon-warning'">
     </app-icon>
+</span>
+<span *ngIf="!(serverAlive$ | async) && (serverHealthLoading$ | async)">
+    <div class="health-loading-spinner-container">
+        <mat-spinner [diameter]="40" [strokeWidth]="7"></mat-spinner>
+        <span class="text-sm">connecting...</span>
+    </div>
 </span>
