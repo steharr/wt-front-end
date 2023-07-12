@@ -10,7 +10,7 @@ export class HealthService {
   private loading = new BehaviorSubject<boolean>(false);
   loading$ = this.loading.asObservable();
 
-  private serviceAvailable = new BehaviorSubject<boolean>(true);
+  private serviceAvailable = new BehaviorSubject<boolean>(false);
   serviceAvailable$ = this.serviceAvailable.asObservable();
 
   private url: string = environment.url + '/conf/';
