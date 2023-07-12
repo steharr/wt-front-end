@@ -2,7 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './_variables.scss';
+@import "./_variables.scss";
 
 html,
 body {
@@ -18,28 +18,28 @@ body {
 .icon-success {
   padding-top: 0.12rem;
   padding-left: 0.12rem;
-  color: #2E7D32;
+  color: #2e7d32;
 }
 
 .icon-warning {
   padding-top: 0.12rem;
   padding-left: 0.12rem;
-  color: #C62828;
+  color: #c62828;
 }
 
 .icon-info {
   padding-top: 0.12rem;
   padding-left: 0.12rem;
-  color: #F9A825;
+  color: #f9a825;
 }
 .icon-success-base {
-  color: #2E7D32 !important;
+  color: #2e7d32 !important;
 }
 .icon-warning-base {
-  color: #C62828 !important;
+  color: #c62828 !important;
 }
 .icon-info-base {
-  color: #F9A825 !important; 
+  color: #f9a825 !important;
 }
 .icon-multiply {
   font-size: 1.25rem;
@@ -53,7 +53,7 @@ body {
 
 .icon-trash {
   color: $icon-grey;
-  opacity: .75;
+  opacity: 0.75;
 
   &:hover {
     opacity: 1;
@@ -70,7 +70,7 @@ body {
 }
 
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: #fcca46;
+  --mdc-circular-progress-active-indicator-color: #454545;
 }
 
 .mat-mdc-card {
@@ -82,7 +82,10 @@ body {
   flex: 1 1 auto;
 }
 
-.mat-vertical-content-container{
+.mat-vertical-content-container {
   margin-left: 0px !important;
 }
 
+.text-sm {
+  font-size: 0.75rem;
+}
