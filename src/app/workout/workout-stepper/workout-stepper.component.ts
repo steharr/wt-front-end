@@ -7,6 +7,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { MatStepper } from '@angular/material/stepper';
 import { Exercise } from '../models/exercise';
+import { ExerciseType } from '../models/exericise-type';
 import { Workout } from '../models/workout';
 import { WorkoutStepperUiService } from '../services/workout-stepper-ui.service';
 import { WorkoutService } from '../services/workout.service';
@@ -19,14 +20,7 @@ import { WorkoutService } from '../services/workout.service';
 export class WorkoutStepperComponent implements OnInit {
   @ViewChild('stepper') private uiStepper!: MatStepper;
 
-  dummyExerciseOptions = [
-    'deadlifts',
-    'bench press',
-    'squat',
-    'pull ups',
-    'shoulder press',
-  ];
-
+  types: ExerciseType[] = [];
   weights = [0];
   savedExercises = [false];
   exercises: FormGroup[] = [];
@@ -38,7 +32,8 @@ export class WorkoutStepperComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _workoutSaveBottomSheet: MatBottomSheet,
-    private workoutStepperUiService: WorkoutStepperUiService
+    private workoutStepperUiService: WorkoutStepperUiService,
+    private workoutService: WorkoutService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +44,12 @@ export class WorkoutStepperComponent implements OnInit {
       this.isLoading = value;
     });
     this.exercises.push(this.createEmptyExercise());
+
+    this.workoutService.getTypes().subscribe({
+      next: (types) => {
+        this.types = types;
+      },
+    });
   }
 
   addToWorkout(exercise: FormGroup, stepIndex: number) {
