@@ -10,6 +10,8 @@ import {
 } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { CoreModule } from 'src/app/core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { Exercise } from '../models/exercise';
 import { ExerciseType } from '../models/exericise-type';
 import { Workout } from '../models/workout';
@@ -110,7 +112,6 @@ export class WorkoutStepperComponent implements OnInit {
     return {
       date: new Date(),
       exercise: exercises,
-      rating: 2,
       workoutId: 0,
     };
   }
@@ -119,18 +120,32 @@ export class WorkoutStepperComponent implements OnInit {
 @Component({
   selector: 'workout-save-dialog',
   templateUrl: 'workout-save-dialog.html',
+  styleUrls: ['workout-stepper.component.scss'],
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, NgIf, NgFor],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    NgIf,
+    NgFor,
+    CoreModule,
+    SharedModule,
+  ],
 })
-export class WorkoutSaveDialog {
+export class WorkoutSaveDialog implements OnInit {
   dots = 0;
   isLoading = false;
+  workout!: Workout;
+  form: FormGroup = this._formBuilder.group({
+    rating: [null, Validators.required],
+  });
+  stars = -1;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<WorkoutSaveDialog>,
     private workoutService: WorkoutService,
     private workoutStepperUiService: WorkoutStepperUiService,
-    private router: Router
+    private router: Router,
+    private _formBuilder: FormBuilder
   ) {
     this.workoutStepperUiService.loading$.subscribe({
       next: (value) => {
@@ -138,29 +153,45 @@ export class WorkoutSaveDialog {
       },
     });
   }
+  ngOnInit(): void {
+    this.workout = this.data as Workout;
+    this.form.controls['rating'].valueChanges.subscribe({
+      next: (value) => {
+        this.stars = value;
+      },
+    });
+  }
 
   saveWorkout(): void {
-    this.workoutStepperUiService.triggerDotsAnimation();
-    this.workoutStepperUiService.setLoading(true);
-    this.workoutStepperUiService.saveDots$.subscribe(
-      (value) => (this.dots = value)
-    );
+    if (this.form.valid) {
+      this.workoutStepperUiService.triggerDotsAnimation();
+      this.workoutStepperUiService.setLoading(true);
+      this.workoutStepperUiService.saveDots$.subscribe(
+        (value) => (this.dots = value)
+      );
 
-    setTimeout(() => {
-      this.workoutService.saveWorkout(this.data as Workout).subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
-          this.workoutStepperUiService.setLoading();
-        },
-        error: () => {
-          this.workoutStepperUiService.setLoading();
-        },
-        complete: () => {
-          this.workoutStepperUiService.setLoading();
-          this.close();
-        },
-      });
-    }, 500);
+      this.saveRating();
+
+      setTimeout(() => {
+        this.workoutService.saveWorkout(this.workout).subscribe({
+          next: () => {
+            this.router.navigate(['/home']);
+            this.workoutStepperUiService.setLoading();
+          },
+          error: () => {
+            this.workoutStepperUiService.setLoading();
+          },
+          complete: () => {
+            this.workoutStepperUiService.setLoading();
+            this.close();
+          },
+        });
+      }, 500);
+    }
+  }
+
+  saveRating() {
+    this.workout.rating = this.form.controls['rating'].value;
   }
 
   close() {

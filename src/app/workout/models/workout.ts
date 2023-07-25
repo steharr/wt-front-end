@@ -1,8 +1,8 @@
-import { Exercise } from "./exercise";
+import { Exercise } from './exercise';
 
 export interface Workout {
-     workoutId:number,
-     exercise: Exercise[],
-     date:Date,
-     rating:number,
+  workoutId: number;
+  exercise: Exercise[];
+  date: Date;
+  rating?: number;
 }

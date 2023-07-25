@@ -1,6 +1,22 @@
 <h1 mat-dialog-title>Finish Workout</h1>
-<div mat-dialog-content>
-  <div class="flex justify-center gap-11">
+<div mat-dialog-content class="workout-save-dialog">
+  <div class="star-container">
+    <div *ngFor="let i of range(5)">
+      <span *ngIf="i <= stars">
+        <app-icon [matIconName]="'star'" [iconColorType]="'icon-info'"></app-icon>
+      </span>
+      <span *ngIf="i > stars">
+        <app-icon [matIconName]="'star'" [iconColorType]="'icon-default'"></app-icon>
+      </span>
+    </div>
+  </div>
+  <form [formGroup]="form">
+    <mat-slider min="0" max="5" step="1" value="0">
+      <input matSliderThumb formControlName="rating">
+    </mat-slider>
+    <mat-error *ngIf="form.touched && form.controls['rating'].hasError('required')">Please submit a rating</mat-error>
+  </form>
+  <div class="button-container">
     <button mat-raised-button color="secondary" (click)="close()">Close</button>
     <button mat-flat-button color="primary" (click)="saveWorkout()">
       <span *ngIf="!isLoading">Save</span>

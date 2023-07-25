@@ -16,10 +16,10 @@
               <mat-panel-description class="flex flex-row gap-2 justify-between pr-3">
                 <div>
                   <span *ngFor="let i of [1,2,3,4,5]">
-                    <span *ngIf="workout.rating >= i">
+                    <span *ngIf="workout.rating && workout.rating >= i">
                       <mat-icon class="icon-star">star</mat-icon>
                     </span>
-                    <span *ngIf="workout.rating < i">
+                    <span *ngIf="workout.rating && workout.rating < i">
                       <mat-icon>star_border</mat-icon>
                     </span>
                   </span>
