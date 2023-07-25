@@ -34,7 +34,7 @@
         <mat-label>Exercise</mat-label>
 
         <mat-select name="food" formControlName="exercise" (selectionChange)="onFormChange(i)">
-          <mat-option *ngFor="let option of types" [value]="option">
+          <mat-option *ngFor="let option of types" [value]="option.name">
             {{option.name | titlecase}}
           </mat-option>
         </mat-select>

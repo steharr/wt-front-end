@@ -1,12 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 import { Exercise } from '../models/exercise';
 import { ExerciseType } from '../models/exericise-type';
 import { Workout } from '../models/workout';
@@ -77,7 +80,7 @@ export class WorkoutStepperComponent implements OnInit {
   }
 
   openBottomSheet() {
-    this.dialog.open(WorkoutSaveDialog, {
+    const dialogRef = this.dialog.open(WorkoutSaveDialog, {
       data: this.getWorkoutFromForm(),
     });
   }
@@ -117,22 +120,25 @@ export class WorkoutStepperComponent implements OnInit {
   selector: 'workout-save-dialog',
   templateUrl: 'workout-save-dialog.html',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, NgIf, NgFor],
 })
 export class WorkoutSaveDialog {
   dots = 0;
   isLoading = false;
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<WorkoutSaveDialog>,
     private workoutService: WorkoutService,
-    private workoutStepperUiService: WorkoutStepperUiService
+    private workoutStepperUiService: WorkoutStepperUiService,
+    private router: Router
   ) {
-    // this.workoutStepperUiService.loading$.subscribe({
-    //   next: (value) => {
-    //     this.isLoading = value;
-    //   },
-    // });
+    this.workoutStepperUiService.loading$.subscribe({
+      next: (value) => {
+        this.isLoading = value;
+      },
+    });
   }
+
   saveWorkout(): void {
     this.workoutStepperUiService.triggerDotsAnimation();
     this.workoutStepperUiService.setLoading(true);
@@ -140,21 +146,26 @@ export class WorkoutSaveDialog {
       (value) => (this.dots = value)
     );
 
-    // setTimeout(() => {
-    //   this.workoutService.saveWorkout(this.data).subscribe({
-    //     next: () => this.workoutStepperUiService.setLoading(),
-    //     error: () => this.workoutStepperUiService.setLoading(),
-    //     complete: () => {
-    //       this.workoutStepperUiService.setLoading();
-    //       // this.close();
-    //     },
-    //   });
-    // }, 500);
+    setTimeout(() => {
+      this.workoutService.saveWorkout(this.data as Workout).subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+          this.workoutStepperUiService.setLoading();
+        },
+        error: () => {
+          this.workoutStepperUiService.setLoading();
+        },
+        complete: () => {
+          this.workoutStepperUiService.setLoading();
+          this.close();
+        },
+      });
+    }, 500);
   }
 
-  // close() {
-  //   this._bottomSheetRef.dismiss();
-  // }
+  close() {
+    this.dialogRef.close();
+  }
 
   range(limit: number) {
     const range = [];
