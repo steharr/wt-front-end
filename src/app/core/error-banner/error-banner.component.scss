@@ -10,3 +10,17 @@
   padding: 0.25rem;
   border-radius: 0.25rem;
 }
+
+.error-banner-min-width {
+  min-width: 50%;
+}
+
+@media (max-width: 479px) {
+  .error-banner-min-width {
+    min-width: 70%;
+  }
+}
+
+.error-banner-text-container {
+  padding-top: 0.5rem;
+}

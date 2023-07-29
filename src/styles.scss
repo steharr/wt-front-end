@@ -41,6 +41,9 @@ body {
 .icon-info-base {
   color: #f9a825 !important;
 }
+.icon-info-default {
+  color: #a7a7a7 !important;
+}
 .icon-multiply {
   font-size: 1.25rem;
   font-weight: bolder;
@@ -87,5 +90,9 @@ body {
 }
 
 .text-sm {
+  font-size: 0.75rem;
+}
+
+mat-error {
   font-size: 0.75rem;
 }

@@ -1,14 +1,16 @@
 <div *ngFor="let err of errors" class="flex flex-row justify-center my-2">
-    <div *ngIf="show" class="flex flex-row gap-2 justify-between align-center md:w-1/2" [ngClass]="{
+    <div *ngIf="show" class="flex flex-row gap-2 justify-between align-center error-banner-min-width" [ngClass]="{
         'error-warning-base' : types.WARNING === err.type ,
         'error-info-base' : types.INFO === err.type 
     }">
-        <div class="flex flex-row">
+        <div class="flex flex-row error-banner-text-container">
             <app-icon [matIconName]="types.INFO === err.type ? 'info': 'warning'"
                 [iconColorType]="types.INFO === err.type ? 'icon-info': 'icon-warning'"></app-icon>
             <div>{{err.err.message}}</div>
         </div>
-        <app-icon [matIconName]="'close'" [iconTitle]="'dismiss'" (clickEvent)="close(err)"
-            [iconColorType]="'icon-warning'"></app-icon>
+        <div class="error-banner-text-container">
+            <app-icon [matIconName]="'close'" [iconTitle]="'dismiss'" (clickEvent)="close(err)"
+                [iconColorType]="'icon-warning'"></app-icon>
+        </div>
     </div>
 </div>

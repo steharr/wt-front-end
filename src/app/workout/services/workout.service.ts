@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env';
+import { ExerciseType } from '../models/exericise-type';
 import { Workout } from '../models/workout';
 import { WorkoutAnalysis } from '../models/workout-analysis';
 
@@ -15,6 +16,9 @@ export class WorkoutService {
 
   getWorkouts(): Observable<Workout[]> {
     return this.http.get<Workout[]>(this.url + 'home');
+  }
+  getTypes(): Observable<ExerciseType[]> {
+    return this.http.get<ExerciseType[]>(this.url + 'exercises');
   }
   saveWorkout(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(this.url + 'save', workout);
