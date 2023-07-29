@@ -1,7 +1,0 @@
-<div class="flex justify-center gap-11">
-  <button mat-flat-button color="primary" (click)="saveWorkout()">
-    <span *ngIf="!isLoading">Save Workout</span>
-    <span *ngIf="isLoading">Saving <span *ngFor="let i of range(dots)">.</span></span>
-  </button>
-  <button mat-flat-button color="secondary" (click)="close()">Close</button>
-</div>

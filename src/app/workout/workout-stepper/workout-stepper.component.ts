@@ -198,9 +198,9 @@ export class WorkoutSaveDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  range(limit: number) {
+  range(limit: number, start: number = 0) {
     const range = [];
-    for (let i = 0; i < limit; i++) {
+    for (let i = start; i <= limit; i++) {
       range.push(i);
     }
     return range;
