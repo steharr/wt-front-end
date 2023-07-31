@@ -7,7 +7,7 @@ import { ErrorType } from 'src/app/core/error-banner/enums/error-type.enum';
 import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
 import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
 import { ToastService } from 'src/app/core/toast/toast.service';
-import { environment } from 'src/env';
+import { environment } from 'src/environments/environment';
 import { AccountDetails } from '../models/account-details.model';
 import { Auth } from '../models/auth.model';
 

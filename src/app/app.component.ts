@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { combineLatest, filter } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AccountDetails } from './account/models/account-details.model';
 import { AccountService } from './account/services/account.service';
 
@@ -10,6 +11,8 @@ import { AccountService } from './account/services/account.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  envName = environment.envName;
+  version = environment.version;
   showMenu = false;
   isLoggedIn$ = this.accountService.isLoggedIn$;
   accountDetails: AccountDetails | null = null;
