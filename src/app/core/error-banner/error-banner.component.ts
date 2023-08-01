@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { ErrorType } from './enums/error-type.enum';
 import { ErrorBanner } from './models/error-banner.model';
 import { ErrorBannerService } from './services/error-banner.service';
@@ -13,8 +15,14 @@ export class ErrorBannerComponent implements OnInit {
   show: boolean = false;
   id = 0;
   types = ErrorType;
+  navigationEnd$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd)
+  );
 
-  constructor(private errorBannerService: ErrorBannerService) {}
+  constructor(
+    private errorBannerService: ErrorBannerService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.errorBannerService.error$.subscribe({
@@ -27,6 +35,15 @@ export class ErrorBannerComponent implements OnInit {
       },
       complete: () => {
         this.show = false;
+      },
+    });
+    this.navigationEnd$.subscribe({
+      next: () => {
+        this.errors.forEach((e) => {
+          if (e.temporary) {
+            this.close(e);
+          }
+        });
       },
     });
   }

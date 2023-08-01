@@ -2,14 +2,14 @@
   <button mat-icon-button (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Workout Tracker</span>
+  <span><a [routerLink]="(isLoggedIn$ | async) ? '/home':'/'">Workout Tracker</a></span>
   <span class="spacer"></span>
   <app-health [displayError]="true"></app-health>
-  <div *ngIf="(isLoggedIn$ | async) && accountDetails" (click)="logout()" mat-icon-button
-    class="flex justify-center align-center">
+  <div *ngIf="(isLoggedIn$ | async) && accountDetails" mat-icon-button class="flex justify-center align-center">
 
+    <app-icon [matIconName]="'account_circle'" [iconTitle]="accountDetails.username"
+      (clickEvent)="goToHome()"></app-icon>
 
-    <app-icon [matIconName]="'account_circle'" [iconTitle]="accountDetails.username"></app-icon>
     <app-icon [matIconName]="'exit_to_app'" [iconTitle]="'logout'" (clickEvent)="logout()"></app-icon>
 
   </div>

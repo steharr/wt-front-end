@@ -4,4 +4,5 @@ export interface ErrorBanner {
   err: Error;
   type: ErrorType;
   id?: number;
+  temporary?: boolean;
 }

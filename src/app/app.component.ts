@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
   logout() {
     this.accountService.logoutUser();
   }
-
   private getDetails() {
     this.accountService.details().subscribe({
       next: (deets) => {

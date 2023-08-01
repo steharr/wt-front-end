@@ -1,0 +1,40 @@
+@import "../../../variables.scss";
+
+.login-container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .card {
+    width: 40%;
+    @media (max-width: 375px) {
+      width: 100%;
+    }
+  }
+}
+
+.login-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .login-form-field {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.25rem;
+    @media (max-width: 375px) {
+      width: 100%;
+    }
+  }
+  .no-account {
+    a {
+      color: $color-hyperlink;
+
+      &:hover {
+        font-weight: bolder;
+      }
+    }
+  }
+}

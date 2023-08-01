@@ -21,6 +21,9 @@ export class AccountService {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
+  private loading = new BehaviorSubject<boolean>(false);
+  loading$ = this.loading.asObservable();
+
   constructor(
     private http: HttpClient,
     private errorBannerService: ErrorBannerService,
@@ -34,6 +37,7 @@ export class AccountService {
   }
 
   loginUser(details: FormGroup) {
+    this.loading.next(true);
     this.login({
       ...details.value,
     }).subscribe({
@@ -45,13 +49,11 @@ export class AccountService {
           type: ToastTypeEnum.SUCCESS,
           show: true,
         });
+        this.loading.next(false);
         this.router.navigate(['/account/home']);
       },
       error: () => {
-        this.errorBannerService.displayError({
-          err: new Error('Error logging in user, Please try again'),
-          type: ErrorType.WARNING,
-        });
+        this.loading.next(false);
       },
     });
   }

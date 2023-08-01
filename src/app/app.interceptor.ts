@@ -45,6 +45,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     this.errorBannerService.displayError({
       err: error,
       type: ErrorType.WARNING,
+      temporary: true,
     });
   }
 }

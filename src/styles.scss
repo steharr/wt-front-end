@@ -104,3 +104,10 @@ mat-error {
   width: 100%;
   text-align: center;
 }
+
+.card {
+  mat-card-header {
+    font-weight: bolder;
+    margin-bottom: 1rem;
+  }
+}

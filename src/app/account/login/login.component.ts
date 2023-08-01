@@ -8,6 +8,7 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  isLoading$ = this.accountService.loading$;
   hide = true;
   form: FormGroup = this._fb.group({
     username: ['', Validators.required],
