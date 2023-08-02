@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Workout } from 'src/app/workout/models/workout';
@@ -10,10 +10,12 @@ import { WorkoutService } from 'src/app/workout/services/workout.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  STORAGE_KEY = '_sum';
   displayedColumns: string[] = ['exercise', 'sets', 'reps', 'weight'];
   dataSource: Workout[] = [];
   analysis: any;
+  storageMap!: Map<number, WorkoutAnalysis>;
   private subs_: Subscription[] = [];
 
   panelOpenState = false;
@@ -21,14 +23,25 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWorkouts();
+    this.init();
+  }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 
   getAnalysis(id: number) {
-    this.workoutService.getAnalysis(id).subscribe({
-      next: (analysis: WorkoutAnalysis) => {
-        this.analysis = analysis;
-      },
-    });
+    if (!this.storageMap.has(id)) {
+      this.workoutService.getAnalysis(id).subscribe({
+        next: (analysis: WorkoutAnalysis) => {
+          this.analysis = analysis;
+          this.storageMap.set(id, this.analysis);
+          this.updateStorage();
+        },
+      });
+    } else {
+      this.analysis = this.storageMap.get(id);
+    }
   }
 
   onDeleteWorkout(event: MouseEvent, id: number) {
@@ -41,6 +54,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  goToWorkout() {
+    this.router.navigate(['workout']);
+  }
+
   private getWorkouts() {
     this.subs_.push(
       this.workoutService.getWorkouts().subscribe({
@@ -50,8 +67,20 @@ export class HomeComponent implements OnInit {
       })
     );
   }
+  private init() {
+    const existingMapString = localStorage.getItem(this.STORAGE_KEY);
+    if (existingMapString) {
+      this.storageMap = new Map(JSON.parse(existingMapString));
+    } else {
+      this.storageMap = new Map([]);
+      this.updateStorage();
+    }
+  }
 
-  goToWorkout() {
-    this.router.navigate(['workout']);
+  private updateStorage() {
+    localStorage.setItem(
+      this.STORAGE_KEY,
+      JSON.stringify(Array.from(this.storageMap.entries()))
+    );
   }
 }
