@@ -6,6 +6,7 @@ import {
   MatSnackBarRef,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ToastTypeEnum } from './enums/toast-type.enum';
 import { ToastModel } from './models/toast.model';
 import { ToastService } from './toast.service';
 
@@ -27,7 +28,7 @@ export class ToastComponent implements OnInit {
     this.toastService.toast$.subscribe({
       next: (toast: ToastModel) => {
         if (toast.show) {
-          this.open(toast.message);
+          this.open(toast);
         } else if (null === this._snackBar._openedSnackBarRef) {
           this.close();
         }
@@ -35,12 +36,20 @@ export class ToastComponent implements OnInit {
     });
   }
 
-  open(value: string) {
+  open(toast: ToastModel) {
+    let style = '.toast';
+
+    if (toast.type === ToastTypeEnum.HELP) {
+      style += '.help';
+    }
+
     this._snackBar.openFromComponent(WtToastComponent, {
-      duration: 5000,
+      // duration: 5000,
       data: {
-        message: value,
+        message: toast.message,
+        type: toast.type,
       },
+      panelClass: style,
     });
   }
   close() {
@@ -55,12 +64,15 @@ export class ToastComponent implements OnInit {
 })
 export class WtToastComponent {
   message: string = '';
+  type: ToastTypeEnum = ToastTypeEnum.INFO;
+  types = ToastTypeEnum;
 
   constructor(
     private _ref: MatSnackBarRef<WtToastComponent>,
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) {
     this.message = data.message;
+    this.type = data.type;
   }
 
   close() {

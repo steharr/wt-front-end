@@ -10,7 +10,10 @@ import {
 } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
+import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
+import { ToastService } from 'src/app/core/toast/toast.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Exercise } from '../models/exercise';
 import { ExerciseType } from '../models/exericise-type';
@@ -39,7 +42,8 @@ export class WorkoutStepperComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private workoutStepperUiService: WorkoutStepperUiService,
     private workoutService: WorkoutService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -88,13 +92,15 @@ export class WorkoutStepperComponent implements OnInit {
   }
 
   private createEmptyExercise() {
-    return this._formBuilder.group({
+    const form = this._formBuilder.group({
       exercise: ['', Validators.required],
       weight: [0, Validators.required],
       reps: [0, Validators.required],
       sets: [0, Validators.required],
       comment: [''],
     });
+    this.setupExerciseAnalysis(form);
+    return form;
   }
 
   private getWorkoutFromForm(): Workout {
@@ -111,9 +117,29 @@ export class WorkoutStepperComponent implements OnInit {
 
     return {
       date: new Date(),
-      exercise: exercises,
+      exercises: exercises,
       workoutId: 0,
     };
+  }
+
+  private setupExerciseAnalysis(form: FormGroup) {
+    form.controls['exercise'].valueChanges
+      .pipe(
+        switchMap((update) => {
+          return this.workoutService.getExerciseAnalysis(update);
+        })
+      )
+      .subscribe({
+        next: (value) => {
+          if (null !== value.comment) {
+            this.toastService.bread({
+              message: value.comment,
+              type: ToastTypeEnum.HELP,
+              show: true,
+            });
+          }
+        },
+      });
   }
 }
 

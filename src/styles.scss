@@ -111,3 +111,16 @@ mat-error {
     margin-bottom: 1rem;
   }
 }
+
+.mat-mdc-snack-bar-container {
+  &.toast {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &.help {
+      background-color: #f1cc909e !important;
+    }
+  }
+}

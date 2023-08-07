@@ -1,5 +1,5 @@
-<div class="flex justify-between align-center">
-    <div class="flex align-center">
+<div class="toast" [class.help]="type === types.HELP">
+    <div class="">
         {{message}}
     </div>
     <app-icon [matIconName]="'close'" [iconTitle]="'close'" (clickEvent)="close()" [lightTheme]="true"></app-icon>
