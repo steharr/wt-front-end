@@ -111,3 +111,26 @@ mat-error {
     margin-bottom: 1rem;
   }
 }
+
+.toast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .dismiss {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  // default here
+
+  // Help toast
+  &.workout-tracker-toast-help {
+    --mdc-snackbar-container-color: #b3e6f5;
+    --mdc-snackbar-supporting-text-color: $theme-dark;
+    border: 1px solid $theme-dark;
+  }
+}

@@ -3,4 +3,5 @@ export enum ToastTypeEnum {
   SUCCESS,
   WARNING,
   ALERT,
+  HELP,
 }

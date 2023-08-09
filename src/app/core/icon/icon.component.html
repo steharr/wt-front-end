@@ -1,9 +1,10 @@
 <div class="icon-container-sm" [class.light]="lightTheme" [class.dark]="!lightTheme" (click)="onClick()">
-    <div class="icon-sm" [ngClass]="{
+    <div [ngClass]="{
         'icon-success-base' : iconColorType ==='icon-success',
         'icon-warning-base' : iconColorType ==='icon-warning',
         'icon-info-base' : iconColorType ==='icon-info',
-        'icon-info-default' : iconColorType ==='icon-default'
+        'icon-info-default' : iconColorType ==='icon-default',
+        'icon-sm': true
     }">
         <span [ngClass]="{
             'icon-success-base' : iconColorType ==='icon-success',

@@ -2,7 +2,7 @@ import { Exercise } from './exercise';
 
 export interface Workout {
   workoutId: number;
-  exercise: Exercise[];
+  exercises: Exercise[];
   date: Date;
   rating?: number;
 }

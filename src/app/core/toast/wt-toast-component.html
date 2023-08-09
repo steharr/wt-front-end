@@ -1,6 +1,7 @@
-<div class="flex justify-between align-center">
-    <div class="flex align-center">
-        {{message}}
+<div class="toast" [class.help]="type === types.HELP">
+    <div [innerHTML]="message"></div>
+    <div class="dismiss">
+        <app-icon [matIconName]="'close'" [iconTitle]="'dismss'" (clickEvent)="close()"
+            [lightTheme]="type !== types.HELP"></app-icon>
     </div>
-    <app-icon [matIconName]="'close'" [iconTitle]="'close'" (clickEvent)="close()" [lightTheme]="true"></app-icon>
 </div>
