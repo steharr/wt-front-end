@@ -5,5 +5,7 @@ export interface ExerciseAnalysis {
   repsProgression: number;
   weightProgression: ProgressType;
   lastRepsCount: number;
+  lastSetsCount: number;
+  lastWorkoutRating: number;
   comment: string;
 }

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {
   MAT_SNACK_BAR_DATA,
   MatSnackBar,
+  MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
   MatSnackBarRef,
   MatSnackBarVerticalPosition,
@@ -37,20 +38,23 @@ export class ToastComponent implements OnInit {
   }
 
   open(toast: ToastModel) {
-    let style = '.toast';
-
+    let style = 'workout-tracker-toast';
     if (toast.type === ToastTypeEnum.HELP) {
-      style += '.help';
+      style += '-help';
     }
-
-    this._snackBar.openFromComponent(WtToastComponent, {
-      // duration: 5000,
+    const config: MatSnackBarConfig<any> = {
       data: {
         message: toast.message,
         type: toast.type,
       },
       panelClass: style,
-    });
+    };
+
+    if (toast.type !== ToastTypeEnum.HELP) {
+      config.duration = 5000;
+    }
+
+    this._snackBar.openFromComponent(WtToastComponent, config);
   }
   close() {
     this._snackBar.dismiss();

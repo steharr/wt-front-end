@@ -112,15 +112,25 @@ mat-error {
   }
 }
 
-.mat-mdc-snack-bar-container {
-  &.toast {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.toast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
-    &.help {
-      background-color: #f1cc909e !important;
-    }
+  .dismiss {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  // default here
+
+  // Help toast
+  &.workout-tracker-toast-help {
+    --mdc-snackbar-container-color: #b3e6f5;
+    --mdc-snackbar-supporting-text-color: $theme-dark;
+    border: 1px solid $theme-dark;
   }
 }

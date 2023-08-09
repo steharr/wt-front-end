@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span><a [routerLink]="(isLoggedIn$ | async) ? '/home':'/'">Workout Tracker</a></span>
+  <span class="app-title"><a [routerLink]="(isLoggedIn$ | async) ? '/home':'/'">Workout Tracker</a></span>
   <span class="spacer"></span>
   <app-health [displayError]="true"></app-health>
   <div *ngIf="(isLoggedIn$ | async) && accountDetails" mat-icon-button class="flex justify-center align-center">
