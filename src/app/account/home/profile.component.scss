@@ -1,0 +1,29 @@
+@import "../../../variables.scss";
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+
+  .avatar {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid $theme-dark;
+    border-radius: 0.125rem;
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+  .details-element {
+    display: flex;
+    justify-content: space-between;
+
+    .label {
+      font-weight: bolder;
+      margin-right: 1rem;
+    }
+  }
+}

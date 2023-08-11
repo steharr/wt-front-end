@@ -1,4 +1,14 @@
-<div class="flex flex-wrap justify-center gap-2">
+<div>
+  <div>
+    <mat-card class="card mt-2 profile-card">
+      <mat-card-header>
+        <mat-card-title>Your profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-profile></app-profile>
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div class="md:w-2/5">
     <mat-card class="card">
       <mat-card-header>
@@ -66,7 +76,7 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div class="md:w-2/5 flex-column">
+  <div class="md:w-2/5">
     <mat-card class="card">
       <mat-card-header>
         <mat-card-title>Start workout</mat-card-title>
@@ -76,18 +86,6 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="card mt-1">
-      <mat-card-header>
-        <mat-card-title>Your Progress</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        Progress stats here
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="primary">View Analysis</button>
       </mat-card-actions>
     </mat-card>
   </div>
