@@ -6,4 +6,15 @@ export interface AccountDetails {
   username: string;
   password: string;
   email: string;
+  avatarHair:
+    | 'balndess'
+    | 'slaughter'
+    | 'ponyTail'
+    | 'long'
+    | 'curly'
+    | 'stylish'
+    | 'elvis'
+    | 'classic02'
+    | 'classic01';
+  avatarEyes: 'normal' | 'confident' | 'happy';
 }

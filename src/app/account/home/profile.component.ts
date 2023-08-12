@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { funEmoji } from '@dicebear/collection';
+import { miniavs } from '@dicebear/collection';
 import { createAvatar } from '@dicebear/core';
 import { AccountDetails } from '../models/account-details.model';
 import { AccountService } from '../services/account.service';
@@ -20,8 +20,10 @@ export class ProfileComponent implements OnInit {
     this.accountService.details().subscribe({
       next: (details) => {
         this.accountDetails = details;
-        const avatar = createAvatar(funEmoji, {
-          seed: details.username,
+        const avatar = createAvatar(miniavs, {
+          hair: [details.avatarHair],
+          eyes: [details.avatarEyes],
+          backgroundType: ['gradientLinear'],
         });
         var parser = new DOMParser();
         this.profileAvatar = parser.parseFromString(

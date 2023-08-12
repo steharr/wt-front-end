@@ -3,7 +3,7 @@
     <div class="avatar" id="{{AVATAR_KEY}}">
     </div>
 
-    <div class="details">
+    <div class="details" *ngIf="accountDetails">
         <div class="details-element">
             <div class="label">Username:</div>
             <div>{{accountDetails.username}}</div>
