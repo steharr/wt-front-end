@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit {
           hair: [details.avatarHair],
           eyes: [details.avatarEyes],
           backgroundType: ['gradientLinear'],
+          backgroundColor: ['b6e3f4'],
+          backgroundRotation: [180],
         });
         var parser = new DOMParser();
         this.profileAvatar = parser.parseFromString(

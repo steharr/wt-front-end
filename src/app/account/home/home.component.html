@@ -1,15 +1,30 @@
 <div>
-  <div>
-    <mat-card class="card mt-2 profile-card">
-      <mat-card-header>
-        <mat-card-title>Your profile</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-profile></app-profile>
-      </mat-card-content>
-    </mat-card>
+  <div class="home-user-container">
+    <div>
+      <mat-card class="card profile-card">
+        <mat-card-header>
+          <mat-card-title>Your profile</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-profile></app-profile>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <mat-card class="card cta-card">
+        <mat-card-header>
+          <mat-card-title>Start workout</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          The world is your oyster
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
-  <div class="md:w-2/5">
+  <div>
     <mat-card class="card">
       <mat-card-header>
         <mat-card-title>Workout History</mat-card-title>
@@ -76,18 +91,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div class="md:w-2/5">
-    <mat-card class="card">
-      <mat-card-header>
-        <mat-card-title>Start workout</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        The world is your oyster
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+
 
 </div>
