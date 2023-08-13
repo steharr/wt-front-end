@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { WorkoutModule } from '../workout/workout.module';
 import { AccountRoutingModule } from './account-routing.module';
@@ -18,7 +19,13 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     ProfileComponent,
   ],
-  imports: [AccountRoutingModule, SharedModule, CommonModule, WorkoutModule],
+  imports: [
+    AccountRoutingModule,
+    CoreModule,
+    SharedModule,
+    CommonModule,
+    WorkoutModule,
+  ],
   exports: [RegisterComponent],
 })
 export class AccountModule {}

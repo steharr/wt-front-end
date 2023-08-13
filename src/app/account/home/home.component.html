@@ -3,7 +3,11 @@
     <div>
       <mat-card class="card profile-card">
         <mat-card-header>
-          <mat-card-title>Your profile</mat-card-title>
+          <mat-card-title class="title">Your profile
+            <div class="edit">
+              <app-icon [matIconName]="'edit'" (clickEvent)="editProfile()"></app-icon>
+            </div>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <app-profile></app-profile>
@@ -25,7 +29,7 @@
     </div>
   </div>
   <div>
-    <mat-card class="card">
+    <mat-card class="card history-card">
       <mat-card-header>
         <mat-card-title>Workout History</mat-card-title>
         <mat-card-subtitle>Check out your previous sessions</mat-card-subtitle>

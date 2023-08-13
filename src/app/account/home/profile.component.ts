@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { miniavs } from '@dicebear/collection';
-import { createAvatar } from '@dicebear/core';
 import { AccountDetails } from '../models/account-details.model';
 import { AccountService } from '../services/account.service';
+import { AvatarService } from '../services/avatar.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,25 +13,16 @@ export class ProfileComponent implements OnInit {
   profileAvatar!: Document;
   accountDetails!: AccountDetails;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private avatarService: AvatarService
+  ) {}
 
   ngOnInit(): void {
     this.accountService.details().subscribe({
       next: (details) => {
         this.accountDetails = details;
-        const avatar = createAvatar(miniavs, {
-          hair: [details.avatarHair],
-          eyes: [details.avatarEyes],
-          backgroundType: ['gradientLinear'],
-          backgroundColor: ['b6e3f4'],
-          backgroundRotation: [180],
-        });
-        var parser = new DOMParser();
-        this.profileAvatar = parser.parseFromString(
-          avatar.toString(),
-          'image/svg+xml'
-        );
-
+        this.profileAvatar = this.avatarService.createAvatar(details);
         document
           .getElementById(this.AVATAR_KEY)
           ?.appendChild(this.profileAvatar.documentElement);

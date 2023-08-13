@@ -106,9 +106,10 @@ mat-error {
 }
 
 .card {
-  mat-card-header {
+  .title {
+    display: flex;
+    gap: 1rem;
     font-weight: bolder;
-    margin-bottom: 1rem;
   }
 }
 

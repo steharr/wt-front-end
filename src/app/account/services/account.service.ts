@@ -36,6 +36,10 @@ export class AccountService {
     return this.http.get<AccountDetails>(this.url + 'details');
   }
 
+  updateAvatar(details: AccountDetails): Observable<void> {
+    return this.http.patch<void>(this.url + 'avatar', details);
+  }
+
   loginUser(details: FormGroup) {
     this.loading.next(true);
     this.login({
