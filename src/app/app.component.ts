@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       this.navigationRefresh$,
       this.isLoggedIn$,
     ]).subscribe(([event, event2, isLoggedIn]) => {
-      if (this.accountDetails === null && !isLoggedIn) {
+      if (this.accountDetails === null && isLoggedIn) {
         this.getDetails();
       }
     });
