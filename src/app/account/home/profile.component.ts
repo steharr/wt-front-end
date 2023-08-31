@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { combineLatest } from 'rxjs';
 import { AccountDetails } from '../models/account-details.model';
 import { AccountService } from '../services/account.service';
 import { AvatarService } from '../services/avatar.service';
@@ -22,10 +23,20 @@ export class ProfileComponent implements OnInit {
     this.accountService.details().subscribe({
       next: (details) => {
         this.accountDetails = details;
-        this.profileAvatar = this.avatarService.createAvatar(details);
-        document
-          .getElementById(this.AVATAR_KEY)
-          ?.appendChild(this.profileAvatar.documentElement);
+      },
+    });
+
+    this.avatarService.getAndPrintAvatarToKey(this.AVATAR_KEY);
+
+    combineLatest([this.avatarService.userAvatar$]).subscribe({
+      next: ([updatedAvatar]) => {
+        if (updatedAvatar !== null) {
+          this.avatarService.printAvatarToKey(
+            updatedAvatar,
+            this.AVATAR_KEY,
+            true
+          );
+        }
       },
     });
   }

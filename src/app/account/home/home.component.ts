@@ -148,7 +148,11 @@ export class EditProfileDialog implements OnInit {
       next: (details) => {
         this.details = details;
         this.profileAvatar = this.avatarService.createAvatar(details);
-        this.printAvatarToScreen(this.profileAvatar);
+        this.avatarService.printAvatarToKey(
+          this.profileAvatar,
+          this.AVATAR_KEY,
+          true
+        );
       },
     });
     this.avatarService.options().subscribe({
@@ -175,15 +179,10 @@ export class EditProfileDialog implements OnInit {
     });
   }
   close() {
+    this.avatarService.updateUserAvatar(
+      this.avatarService.createAvatar(this.details)
+    );
     this.dialogRef.close();
-  }
-
-  private printAvatarToScreen(avatar: Document) {
-    const ref = document.getElementById(this.AVATAR_KEY);
-    if (ref) {
-      ref.innerHTML = '';
-      ref.appendChild(avatar.documentElement);
-    }
   }
 
   private updateAvatar(
@@ -213,8 +212,10 @@ export class EditProfileDialog implements OnInit {
     if (AvatarChange.EYES === change) {
       newAccountDetails.avatarEyes = (choicesList as Eyes[])[newIndex];
     }
-    this.printAvatarToScreen(
-      this.avatarService.createAvatar(newAccountDetails)
+    this.avatarService.printAvatarToKey(
+      this.avatarService.createAvatar(newAccountDetails),
+      this.AVATAR_KEY,
+      true
     );
     this.details = newAccountDetails;
   }

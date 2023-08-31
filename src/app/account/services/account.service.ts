@@ -97,4 +97,7 @@ export class AccountService {
   private clearToken() {
     localStorage.removeItem(this.TOKEN_KEY);
   }
+  public hasToken() {
+    return localStorage.getItem(this.TOKEN_KEY) !== null;
+  }
 }

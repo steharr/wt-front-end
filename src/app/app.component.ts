@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { combineLatest, filter } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Subscription, combineLatest, filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountDetails } from './account/models/account-details.model';
 import { AccountService } from './account/services/account.service';
@@ -11,6 +11,12 @@ import { AccountService } from './account/services/account.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  private navigationRefresh$ = this.router.events.pipe(
+    filter(
+      (event) => event instanceof NavigationStart && !this.router.navigated
+    )
+  );
+  private pageRefreshSubscription!: Subscription;
   envName = environment.envName;
   version = environment.version;
   showMenu = false;
@@ -22,13 +28,15 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
-    combineLatest([this.navigationEnd$, this.isLoggedIn$]).subscribe(
-      ([event, isLoggedIn]) => {
-        if (this.accountDetails === null && isLoggedIn) {
-          this.getDetails();
-        }
+    combineLatest([
+      this.navigationEnd$,
+      this.navigationRefresh$,
+      this.isLoggedIn$,
+    ]).subscribe(([event, event2, isLoggedIn]) => {
+      if (this.accountDetails === null && !isLoggedIn) {
+        this.getDetails();
       }
-    );
+    });
   }
 
   goToWorkout() {
