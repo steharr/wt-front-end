@@ -1,17 +1,22 @@
-@import '../../../variables';
+@import "../../../variables";
 
-.analysis-box{
-    min-height: 5rem;
-    border: .125rem solid $theme-columbia;
-    padding: 0rem 1rem;
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: $theme-columbia-dark;
-    border-radius: .125rem .125rem 0 0;
+.analysis-box {
+  min-height: 5rem;
+  padding: 0rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $theme-grey;
+  color: $theme-white;
+  border-radius: 0.125rem 0.125rem 0 0;
 
-    .analysis-box-label{
-        font-weight: 400;
-    }
+  .analysis-box-label {
+    font-weight: bold;
+    color: $theme-dark;
+  }
+  .analysis-box-score {
+    font-size: 1.25rem;
+    color: $theme-dark;
+  }
 }

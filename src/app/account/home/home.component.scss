@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 .workout-panel {
-  background-color: $theme-columbia;
+  outline: $theme-grey solid 2.5px;
 }
 
 .home-user-container {
@@ -12,19 +12,11 @@
   gap: 2rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
 
-.profile-card {
-  height: 10rem;
-  min-width: 18rem;
-  @media (max-width: 375px) {
-    width: 100%;
+  .user-card {
+    height: 10rem;
+    min-width: 30%;
   }
-}
-
-.cta-card {
-  height: 10rem;
-  min-width: 18rem;
 }
 
 .history-card {
@@ -43,7 +35,9 @@
   width: 28px;
   height: 28px;
   &:hover {
-    background-color: $theme-light-grey;
+    outline: $theme-dark solid 1px;
+    background-color: $theme-grey;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   }
 }
 

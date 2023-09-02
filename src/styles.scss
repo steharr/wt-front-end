@@ -35,7 +35,7 @@ body {
   color: #f9a825;
 }
 .icon-success-base {
-  color: #2e7d32 !important;
+  color: $theme-green !important;
 }
 .icon-warning-base {
   color: #c62828 !important;
@@ -107,6 +107,7 @@ mat-error {
 }
 
 .card {
+  background-color: $theme-light-blue;
   .title {
     display: flex;
     gap: 1rem;
@@ -127,14 +128,18 @@ mat-error {
 }
 
 .mat-mdc-snack-bar-container {
-  // default here
-
-  // Help toast
   &.workout-tracker-toast-help {
     --mdc-snackbar-container-color: #b3e6f5;
     --mdc-snackbar-supporting-text-color: $theme-dark;
     border: 1px solid $theme-dark;
   }
+}
+.mat-mdc-card-header {
+  background-color: $theme-light-grey;
+
+  min-height: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .logo-big {
@@ -169,4 +174,12 @@ mat-error {
       background-color: $theme-light-grey;
     }
   }
+}
+
+.main-app-toolbar {
+  background-color: $theme-grey;
+}
+
+th {
+  font-weight: bold !important;
 }

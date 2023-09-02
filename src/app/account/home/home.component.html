@@ -1,48 +1,53 @@
 <div>
   <div class="home-user-container">
-    <div>
-      <mat-card class="card profile-card" [appearance]="'outlined'">
-        <mat-card-header>
-          <mat-card-title class="title">Profile
-            <div class="title-button">
-              <app-icon [matIconName]="'edit'" (clickEvent)="editProfile()"></app-icon>
-            </div>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <app-profile></app-profile>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div>
-      <mat-card class="card cta-card" [appearance]="'outlined'">
-        <mat-card-header>
-          <mat-card-title class="title">Start Workout</mat-card-title>
+
+    <mat-card class="card user-card" [appearance]="'outlined'">
+      <mat-card-header>
+        <mat-card-title class="title">Profile
           <div class="title-button">
-            <app-icon [matIconName]="'fitness_center'" (clickEvent)="goToWorkout()"></app-icon>
+            <app-icon [matIconName]="'edit'" (clickEvent)="editProfile()"></app-icon>
           </div>
-        </mat-card-header>
-        <mat-card-content>
-          Record your workout data!
-        </mat-card-content>
-        <mat-card-actions [align]="'end'">
-          <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-profile></app-profile>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="card user-card" [appearance]="'outlined'">
+      <mat-card-header>
+        <mat-card-title class="title">Start Workout</mat-card-title>
+        <div class="title-button">
+          <app-icon [matIconName]="'fitness_center'" (clickEvent)="goToWorkout()"></app-icon>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        Record your workout data!
+      </mat-card-content>
+      <mat-card-actions [align]="'end'">
+        <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
+      </mat-card-actions>
+    </mat-card>
+
+
+
   </div>
   <div>
     <mat-card class="card history-card" [appearance]="'outlined'">
       <mat-card-header>
         <mat-card-title class="title">Workout History</mat-card-title>
-        <mat-card-subtitle>Check out your previous sessions</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
+        <div class="mb-1">
+          Check out your previous sessions...
+        </div>
         <mat-accordion>
           <mat-expansion-panel class="workout-panel" *ngFor="let workout of dataSource"
             (opened)="getAnalysis(workout.workoutId)">
             <mat-expansion-panel-header class="workout-panel-header">
               <mat-panel-title>
+                <app-icon [matIconName]="'check_circle_outline'" [iconColorType]="'icon-success'"></app-icon>
                 <div>{{workout.date| date: 'dd/MM/yyyy'}}</div>
               </mat-panel-title>
               <mat-panel-description class="flex flex-row gap-2 justify-between pr-3">
