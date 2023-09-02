@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 .workout-panel {
-  outline: $theme-grey solid 2.5px;
+  outline: $theme-light-grey solid 2.5px;
 }
 
 .home-user-container {
@@ -15,7 +15,10 @@
 
   .user-card {
     height: 10rem;
-    min-width: 30%;
+    min-width: 28.5%;
+    @media (max-width: 600px) {
+      width: 95%;
+    }
   }
 }
 
@@ -25,7 +28,7 @@
   width: 60%;
 
   @media (max-width: 600px) {
-    width: 100%;
+    width: 95%;
   }
 }
 
