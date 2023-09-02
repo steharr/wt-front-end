@@ -1,10 +1,10 @@
 <div>
   <div class="home-user-container">
     <div>
-      <mat-card class="card profile-card">
+      <mat-card class="card profile-card" [appearance]="'outlined'">
         <mat-card-header>
-          <mat-card-title class="title">Your profile
-            <div class="edit">
+          <mat-card-title class="title">Profile
+            <div class="title-button">
               <app-icon [matIconName]="'edit'" (clickEvent)="editProfile()"></app-icon>
             </div>
           </mat-card-title>
@@ -15,23 +15,26 @@
       </mat-card>
     </div>
     <div>
-      <mat-card class="card cta-card">
+      <mat-card class="card cta-card" [appearance]="'outlined'">
         <mat-card-header>
-          <mat-card-title>Start workout</mat-card-title>
+          <mat-card-title class="title">Start Workout</mat-card-title>
+          <div class="title-button">
+            <app-icon [matIconName]="'fitness_center'" (clickEvent)="goToWorkout()"></app-icon>
+          </div>
         </mat-card-header>
         <mat-card-content>
-          The world is your oyster
+          Record your workout data!
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions [align]="'end'">
           <button mat-flat-button color="primary" (click)="goToWorkout()">Go!</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
   <div>
-    <mat-card class="card history-card">
+    <mat-card class="card history-card" [appearance]="'outlined'">
       <mat-card-header>
-        <mat-card-title>Workout History</mat-card-title>
+        <mat-card-title class="title">Workout History</mat-card-title>
         <mat-card-subtitle>Check out your previous sessions</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>

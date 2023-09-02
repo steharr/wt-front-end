@@ -3,16 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 @import "./_variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
 
 html,
 body {
   height: 100%;
   color: $theme-dark;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .icon-success {
@@ -51,7 +53,6 @@ body {
 
 .icon-star {
   color: $icon-yellow;
-  text-shadow: 0px 0px 9px $theme-dark;
 }
 
 .icon-trash {
@@ -133,5 +134,39 @@ mat-error {
     --mdc-snackbar-container-color: #b3e6f5;
     --mdc-snackbar-supporting-text-color: $theme-dark;
     border: 1px solid $theme-dark;
+  }
+}
+
+.logo-big {
+  height: 8rem;
+}
+.logo-divider {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.logo-subtitle {
+  text-align: center;
+  color: $theme-dark;
+  font-style: bold;
+  font-size: 0.75rem;
+}
+
+.toolbar-list {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  .toolbar-option {
+    color: $theme-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1rem;
+    min-height: 2rem;
+    &:hover {
+      background-color: $theme-light-grey;
+    }
   }
 }

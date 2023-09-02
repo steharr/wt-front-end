@@ -1,9 +1,14 @@
 <div class="login-container">
-    <mat-card class="card">
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+    <mat-card class="card" [appearance]="'outlined'">
+        <mat-card-content class="login-card-details-container">
+            <div>
+                <img class="logo-big" src="../../../assets/png/logo-cropped-transparent.png" alt="">
+                <div class="logo-subtitle"> -- Workout Tracker -- </div>
+                <div class="logo-divider">
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+
             <form [formGroup]="form" class="login-form-container">
                 <mat-form-field class="login-form-field">
                     <mat-label>Username</mat-label>

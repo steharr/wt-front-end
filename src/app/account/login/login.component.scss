@@ -11,6 +11,12 @@
       width: 100%;
     }
   }
+  .login-card-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .login-form-container {

@@ -25,28 +25,25 @@
 .cta-card {
   height: 10rem;
   min-width: 18rem;
-  @media (max-width: 375px) {
-    width: 100%;
-  }
 }
 
 .history-card {
-  height: 10rem;
-  min-width: 18rem;
-  @media (max-width: 375px) {
+  min-height: 10rem;
+  margin: 0 auto;
+  width: 60%;
+
+  @media (max-width: 600px) {
     width: 100%;
-    margin: 0 auto;
   }
 }
 
-.edit {
-  background-color: $icon-light-grey;
+.title-button {
+  margin-left: 1rem;
   border-radius: 50%;
   width: 28px;
   height: 28px;
-
   &:hover {
-    opacity: 0.85;
+    background-color: $theme-light-grey;
   }
 }
 

@@ -1,29 +1,34 @@
-<mat-toolbar>
-  <button mat-icon-button (click)="toggleMenu()">
+<mat-toolbar class="main-app-toolbar">
+  <button mat-icon-button *ngIf="(isLoggedIn$ | async) && accountDetails" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
   <span class="app-title">
     <a [routerLink]="(isLoggedIn$ | async) ? '/home':'/'">
-      RepCounter
-
+      <span class="app-title-text">RepCounter</span>
     </a>
   </span>
   <span class="spacer"></span>
   <app-health [displayError]="true"></app-health>
   <div *ngIf="(isLoggedIn$ | async) && accountDetails" mat-icon-button class="flex justify-center align-center">
-
     <app-icon [matIconName]="'account_circle'" [iconTitle]="accountDetails.username"
       (clickEvent)="goToHome()"></app-icon>
-
     <app-icon [matIconName]="'exit_to_app'" [iconTitle]="'logout'" (clickEvent)="logout()"></app-icon>
-
   </div>
 </mat-toolbar>
 <mat-toolbar *ngIf="showMenu">
-  <mat-tab-group>
-    <mat-tab label="Home" (click)="goToHome()"></mat-tab>
-    <mat-tab label="Workout" (click)="goToWorkout()"></mat-tab>
-  </mat-tab-group>
+
+  <div class="toolbar-list">
+    <div (click)="goToHome()" class="toolbar-option">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div (click)="goToWorkout()" class="toolbar-option">
+      <mat-icon>fitness_center</mat-icon>
+      <span>Start Workout</span>
+    </div>
+  </div>
+
 </mat-toolbar>
 
 <app-error-banner></app-error-banner>
