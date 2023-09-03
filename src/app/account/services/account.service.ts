@@ -68,6 +68,12 @@ export class AccountService {
       next: (res) => {
         this.storeToken(res.token);
         this.updateLoginStatus(true);
+        this.toastService.bread({
+          message: 'Register Successful!',
+          type: ToastTypeEnum.SUCCESS,
+          show: true,
+        });
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.errorBannerService.displayError({

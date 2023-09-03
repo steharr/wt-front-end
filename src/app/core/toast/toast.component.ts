@@ -42,6 +42,9 @@ export class ToastComponent implements OnInit {
     if (toast.type === ToastTypeEnum.HELP) {
       style += '-help';
     }
+    if (toast.type === ToastTypeEnum.SUCCESS) {
+      style += '-success';
+    }
     const config: MatSnackBarConfig<any> = {
       data: {
         message: toast.message,

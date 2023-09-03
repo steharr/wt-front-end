@@ -133,6 +133,9 @@ mat-error {
     --mdc-snackbar-supporting-text-color: $theme-dark;
     border: 1px solid $theme-dark;
   }
+  &.workout-tracker-toast-success {
+    --mdc-snackbar-container-color: #00b894 !important;
+  }
 }
 .mat-mdc-card-header {
   background-color: $theme-light-grey;
