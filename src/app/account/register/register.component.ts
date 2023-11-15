@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
   genders = GenderTypeEnum;
 
   step1: FormGroup = this._fb.group({
-    username: ['dev2', Validators.required],
-    email: ['abc@gmail.com', [Validators.required, Validators.email]],
+    username: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
   });
 
   step2: FormGroup = this._fb.group({
@@ -28,15 +28,15 @@ export class RegisterComponent implements OnInit {
       }),
       Validators.required,
     ],
-    firstName: ['Stephen', Validators.required],
-    lastName: ['Harrold', Validators.required],
-    age: [29, Validators.required],
-    gender: [GenderTypeEnum.MALE, Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    age: [null, Validators.required],
+    gender: [null, Validators.required],
   });
 
   step3: FormGroup = this._fb.group({
-    passwordConfirm: ['test', [Validators.required]],
-    password: ['test', [Validators.required]],
+    passwordConfirm: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   form: FormGroup = this._fb.group({
