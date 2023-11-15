@@ -1,0 +1,22 @@
+<div class="container">
+    <h1 mat-dialog-title>{{header}}</h1>
+    <div mat-dialog-content class="edit-profile-dialog">
+        <div class="avatar">
+            <div id="{{AVATAR_KEY}}"></div>
+            <div class="arrow left-hair"> <app-icon [matIconName]="'keyboard_arrow_left'"
+                    (clickEvent)="shift(chg.HAIR, dirs.LEFT)"></app-icon></div>
+            <div class="arrow right-hair"> <app-icon [matIconName]="'keyboard_arrow_right'"
+                    (clickEvent)="shift(chg.HAIR, dirs.RIGHT)"></app-icon></div>
+            <div class="arrow left-eyes"> <app-icon [matIconName]="'keyboard_arrow_left'"
+                    (clickEvent)="shift(chg.EYES, dirs.LEFT)"></app-icon></div>
+            <div class="arrow right-eyes"> <app-icon [matIconName]="'keyboard_arrow_right'"
+                    (clickEvent)="shift(chg.EYES, dirs.RIGHT)"></app-icon></div>
+        </div>
+        <div class="button-container" *ngIf="showOptions">
+            <button mat-raised-button color="secondary" (click)="close()">Close</button>
+            <button mat-flat-button color="primary" (click)="save()">
+                <span>Save</span>
+            </button>
+        </div>
+    </div>
+</div>

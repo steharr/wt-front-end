@@ -17,8 +17,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { Workout } from 'src/app/workout/models/workout';
 import { WorkoutAnalysis } from 'src/app/workout/models/workout-analysis';
 import { WorkoutService } from 'src/app/workout/services/workout.service';
+import {
+  AvatarOptions,
+  Eyes,
+  Hairs,
+} from '../../core/avatar-editor/models/avatar-options.model';
 import { AccountDetails } from '../models/account-details.model';
-import { AvatarOptions, Eyes, Hairs } from '../models/avatar-options.model';
 import { AccountService } from '../services/account.service';
 import { AvatarService } from '../services/avatar.service';
 
