@@ -1,0 +1,50 @@
+@import "../../../variables.scss";
+
+.container {
+  margin: 1rem 0rem;
+}
+
+.avatar {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+  border: 1px solid $theme-dark;
+
+  .arrow {
+    &.left-hair {
+      position: absolute;
+      left: -15px;
+      top: 2rem;
+    }
+    &.left-eyes {
+      position: absolute;
+      left: -15px;
+      top: 5rem;
+    }
+    &.right-hair {
+      position: absolute;
+      right: -15px;
+      top: 2rem;
+    }
+    &.right-eyes {
+      position: absolute;
+      right: -15px;
+      top: 5rem;
+    }
+  }
+}
+
+.edit-profile-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+}

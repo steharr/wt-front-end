@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AvatarDetails } from 'src/app/core/avatar-editor/models/avatar-details.model';
 import { GenderTypeEnum } from '../enums/gender-type.enum';
 import { AccountService } from '../services/account.service';
 
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
     passwordConfirm: ['', [Validators.required]],
     password: ['', [Validators.required]],
     email: ['', Validators.required],
+    avatarDetails: ['', Validators.required],
   });
   constructor(
     private accountService: AccountService,
@@ -32,16 +34,7 @@ export class RegisterComponent implements OnInit {
       this.accountService.registerUser(this.form);
     }
   }
-  filldummydata() {
-    this.form.patchValue({
-      firstName: 'test',
-      lastName: 'test',
-      age: 1,
-      email: 'test',
-      username: 'test',
-      passwordConfirm: 'test',
-      password: 'test',
-      gender: GenderTypeEnum.MALE,
-    });
+  onChangeAvatar($event: AvatarDetails) {
+    this.form.patchValue({ avatarDetails: JSON.stringify($event) });
   }
 }

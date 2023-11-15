@@ -5,6 +5,8 @@
     <mat-card-content>
         <form [formGroup]="form" class="register-form">
 
+            <app-avatar-editor [showOptions]="false" (changeEvent)="onChangeAvatar($event)"></app-avatar-editor>
+
             <div class="row">
                 <mat-form-field>
                     <mat-label>First Name</mat-label>

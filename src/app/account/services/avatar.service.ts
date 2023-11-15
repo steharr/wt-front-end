@@ -3,9 +3,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { miniavs } from '@dicebear/collection';
 import { createAvatar } from '@dicebear/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { AvatarDetails } from 'src/app/core/avatar-editor/models/avatar-details.model';
 import { environment } from 'src/environments/environment';
+import { AvatarOptions } from '../../core/avatar-editor/models/avatar-options.model';
 import { AccountDetails } from '../models/account-details.model';
-import { AvatarOptions } from '../models/avatar-options.model';
 import { AccountService } from './account.service';
 
 @Injectable({
@@ -52,6 +53,20 @@ export class AvatarService {
   }
 
   createAvatar(details: AccountDetails): Document {
+    const avatar = createAvatar(miniavs, {
+      hair: [details.avatarHair],
+      eyes: [details.avatarEyes],
+      backgroundType: ['gradientLinear'],
+      backgroundColor: ['b6e3f4'],
+      backgroundRotation: [0, 180],
+      body: ['tShirt'],
+    });
+    var parser = new DOMParser();
+    const result = parser.parseFromString(avatar.toString(), 'image/svg+xml');
+    return result;
+  }
+
+  createAvatarFromAvatarDetails(details: AvatarDetails): Document {
     const avatar = createAvatar(miniavs, {
       hair: [details.avatarHair],
       eyes: [details.avatarEyes],
