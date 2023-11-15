@@ -1,99 +1,96 @@
 <div class="gutter">
-    <div class="content-header">
-        <h1>Sign Up</h1>
-        <h3>Its quick and easy</h3>
+    <div class="register-container">
+        <div class="content-header">
+            <h1>Sign Up</h1>
+            <h3>Its quick and easy</h3>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-stepper orientation="vertical" [linear]="true" #stepper>
+            <mat-step [stepControl]="step1">
+                <form [formGroup]="step1">
+                    <ng-template matStepLabel>Select your acount details</ng-template>
+                    <div class="content column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput formControlName="username">
+                            <mat-error *ngIf="step1.controls['username'].hasError('notUnique')">Username already in
+                                use</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-error *ngIf="step1.controls['email'].hasError('email')">Not a valid email
+                                address</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-flat-button (click)="validateStep1(stepper)">Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="step2">
+                <form [formGroup]="step2">
+                    <ng-template matStepLabel>Choose your profile information</ng-template>
+                    <app-avatar-editor [showOptions]="false" (changeEvent)="onChangeAvatar($event)"></app-avatar-editor>
+                    <div class="content column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gender</mat-label>
+                            <mat-select name="gender" formControlName="gender">
+                                <mat-option [value]="genders.MALE">
+                                    Male
+                                </mat-option>
+                                <mat-option [value]="genders.FEMALE">
+                                    Female
+                                </mat-option>
+                                <mat-option [value]="genders.OTHER">
+                                    Other
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Age</mat-label>
+                            <input matInput type="number" formControlName="age">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-flat-button (click)="next(stepper)">Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="step3">
+                <form [formGroup]="step3">
+                    <ng-template matStepLabel>Secure your account</ng-template>
+                    <div class="content column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                'visibility'}}</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordConfirm">
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                'visibility'}}</mat-icon>
+                            <mat-error *ngIf="step3.controls['passwordConfirm'].hasError('passwordNoMatch')">Passwords
+                                not
+                                matching</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <!-- <button mat-flat-button (click)="stepper.reset()">Reset</button> -->
+                        <button mat-flat-button color="primary" matStepperNext (click)="submit()">Submit</button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-stepper>
     </div>
-
-    <mat-divider></mat-divider>
-
-    <mat-stepper orientation="vertical" [linear]="true" #stepper>
-        <mat-step [stepControl]="step1">
-            <form [formGroup]="step1">
-                <ng-template matStepLabel>Select your acount details</ng-template>
-                <div class="column">
-                    <mat-form-field>
-                        <mat-label>Username</mat-label>
-                        <input matInput formControlName="username">
-                        <mat-error *ngIf="step1.controls['username'].hasError('notUnique')">Username already in
-                            use</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Email</mat-label>
-                        <input matInput formControlName="email">
-                        <mat-error *ngIf="step1.controls['email'].hasError('email')">Not a valid email
-                            address</mat-error>
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <button mat-flat-button (click)="validateStep1(stepper)">Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="step2">
-            <form [formGroup]="step2">
-                <ng-template matStepLabel>Choose your profile information</ng-template>
-
-                <app-avatar-editor [showOptions]="false" (changeEvent)="onChangeAvatar($event)"></app-avatar-editor>
-
-                <div class="column">
-                    <mat-form-field>
-                        <mat-label>First Name</mat-label>
-                        <input matInput formControlName="firstName">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Last Name</mat-label>
-                        <input matInput formControlName="lastName">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Gender</mat-label>
-                        <mat-select name="gender" formControlName="gender">
-                            <mat-option [value]="genders.MALE">
-                                Male
-                            </mat-option>
-                            <mat-option [value]="genders.FEMALE">
-                                Female
-                            </mat-option>
-                            <mat-option [value]="genders.OTHER">
-                                Other
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Age</mat-label>
-                        <input matInput type="number" formControlName="age">
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <button mat-flat-button (click)="next(stepper)">Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="step3">
-            <form [formGroup]="step3">
-                <ng-template matStepLabel>Secure your account</ng-template>
-                <div class="column">
-                    <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
-                            'visibility'}}</mat-icon>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordConfirm">
-                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
-                            'visibility'}}</mat-icon>
-                        <mat-error *ngIf="step3.controls['passwordConfirm'].hasError('passwordNoMatch')">Passwords not
-                            matching</mat-error>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <!-- <button mat-flat-button (click)="stepper.reset()">Reset</button> -->
-                    <button mat-flat-button color="primary" matStepperNext (click)="submit()">Submit</button>
-                </div>
-            </form>
-        </mat-step>
-    </mat-stepper>
 </div>

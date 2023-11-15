@@ -1,0 +1,15 @@
+@import "../../../variables.scss";
+.register-container {
+  .content {
+    padding: 1rem 0rem;
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  @media (min-width: $breakpoint-laptop) {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
+}
