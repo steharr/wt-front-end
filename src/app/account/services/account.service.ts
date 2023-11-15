@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AvatarDetails } from 'src/app/core/avatar-editor/models/avatar-details.model';
 import { ErrorType } from 'src/app/core/error-banner/enums/error-type.enum';
 import { ErrorBannerService } from 'src/app/core/error-banner/services/error-banner.service';
 import { ToastTypeEnum } from 'src/app/core/toast/enums/toast-type.enum';
@@ -62,9 +63,7 @@ export class AccountService {
     });
   }
   registerUser(details: FormGroup) {
-    this.register({
-      ...details.value,
-    }).subscribe({
+    this.register(this.extractRegisterData(details)).subscribe({
       next: (res) => {
         this.storeToken(res.token);
         this.updateLoginStatus(true);
@@ -91,6 +90,9 @@ export class AccountService {
   updateLoginStatus(status: boolean) {
     this.isLoggedIn.next(status);
   }
+  usernameExists(username: string): Observable<any> {
+    return this.http.get<any>(this.url + `username-exists?check=${username}`);
+  }
   private register(details: AccountDetails): Observable<Auth> {
     return this.http.post<Auth>(this.url + 'register', details);
   }
@@ -105,5 +107,27 @@ export class AccountService {
   }
   public hasToken() {
     return localStorage.getItem(this.TOKEN_KEY) !== null;
+  }
+
+  private extractRegisterData(form: FormGroup): AccountDetails {
+    const step1 = form.controls['step1'] as FormGroup;
+    const step2 = form.controls['step2'] as FormGroup;
+    const step3 = form.controls['step3'] as FormGroup;
+    const avatarForm: AvatarDetails = JSON.parse(
+      step2.controls['avatarDetails'].value
+    );
+    return {
+      username: step1.controls['username'].value,
+      email: step1.controls['email'].value,
+
+      age: step2.controls['age'].value,
+      avatarEyes: avatarForm.avatarEyes,
+      avatarHair: avatarForm.avatarHair,
+      firstName: step2.controls['firstName'].value,
+      gender: step2.controls['gender'].value,
+      lastName: step2.controls['lastName'].value,
+
+      password: step3.controls['password'].value,
+    };
   }
 }

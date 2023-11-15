@@ -15,6 +15,7 @@ import {
 } from 'src/app/core/avatar-editor/models/avatar-options.model';
 import { ToastService } from 'src/app/core/toast/toast.service';
 import { AvatarDetails } from '../../core/avatar-editor/models/avatar-details.model';
+import { AvatarDefaults } from './constants/avatar-defaults.constant';
 
 @Component({
   selector: 'app-avatar-editor',
@@ -34,8 +35,8 @@ export class AvatarEditorComponent implements OnInit, AfterViewInit {
   chg = AvatarChange;
   options!: AvatarOptions;
   details: AvatarDetails = {
-    avatarEyes: 'normal',
-    avatarHair: 'balndess',
+    avatarEyes: AvatarDefaults.DEFAULT_EYES,
+    avatarHair: AvatarDefaults.DEFAULT_HAIR,
   };
 
   constructor(

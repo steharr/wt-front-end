@@ -186,3 +186,44 @@ mat-error {
 th {
   font-weight: bold !important;
 }
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.content-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 0.5rem;
+  color: $theme-dark-light;
+
+  h1,
+  h2,
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+
+  h1 {
+    color: $theme-dark;
+    font-weight: 700;
+  }
+}
+
+.gutter {
+  @media (min-width: $breakpoint-tablet) {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 1rem;
+  }
+}
