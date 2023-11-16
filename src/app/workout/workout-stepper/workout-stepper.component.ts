@@ -37,6 +37,7 @@ export class WorkoutStepperComponent implements OnInit {
   saveDots = 0;
   isLoading = false;
   activeStepIndex = 0;
+  mobileMode = this.isMobile();
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -89,6 +90,14 @@ export class WorkoutStepperComponent implements OnInit {
     const dialogRef = this.dialog.open(WorkoutSaveDialog, {
       data: this.getWorkoutFromForm(),
     });
+  }
+
+  incrementWeight(index: number, value: number) {
+    this.weights[index] += value;
+  }
+
+  private isMobile() {
+    return window.innerWidth < 768;
   }
 
   private createEmptyExercise() {
