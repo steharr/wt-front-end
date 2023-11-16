@@ -27,3 +27,32 @@
     align-items: center;
   }
 }
+
+.weight-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .mdc-text-field__input {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+  }
+  .weight-add {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .quick-add {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .mat-mdc-fab,
+  .mat-mdc-mini-fab {
+    box-shadow: none !important;
+  }
+}

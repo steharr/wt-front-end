@@ -5,6 +5,12 @@
 @import "./_variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat");
 
+* {
+  &:not(mat-icon) {
+    font-family: "Montserrat", sans-serif !important;
+  }
+}
+
 html,
 body {
   height: 100%;
@@ -14,7 +20,6 @@ body {
 
 body {
   margin: 0;
-  // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .icon-success {
